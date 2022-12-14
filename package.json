@@ -6,8 +6,20 @@
   "scripts": {
     "start": "webpack serve --open --config ./webpack.config.js --env mode=dev",
     "build": "webpack --config ./webpack.config.js --env mode=prod",
-    "lint": "eslint . --ext .ts",
-    "prepare": "husky install"
+    "lint": "eslint --debug ./src/",
+    "lint:write": "eslint --debug ./src/ --fix --color",
+    "prettier": "prettier --write ./src/*.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js|ts)": [
+      "npm run lint:write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -30,6 +42,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "html-webpack-plugin": "^5.2.0",
     "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
     "prettier": "2.2.1",
     "style-loader": "^2.0.0",
     "ts-loader": "^9.4.2",
