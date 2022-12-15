@@ -3,7 +3,6 @@
   "extends": [
     "airbnb-base",
     "airbnb-typescript/base",
-    "plugin:prettier/recommended",
     "prettier",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
@@ -23,7 +22,6 @@
     "no-debugger": "off",
     "no-console": 0,
     "class-methods-use-this": "off",
-    "@typescript-eslint/rule-name": "error",
-    "@typescript-eslint/no-explicit-any": "warn"
+    "@typescript-eslint/no-explicit-any": 2
   }
 }
