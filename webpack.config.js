@@ -12,8 +12,28 @@ const baseConfig = {
       {
         test: /\.scss$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader }, 'css-loader', 'sass-loader',
+          { loader: MiniCssExtractPlugin.loader },
         ],
+        use: [
+          // Creates 'styles' nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to Css
+          'sass-loader',
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                'src/styles/vars.scss',
+                'src/styles/mixins.scss',
+                'src/styles/normalize.scss',
+              ],
+            },
+          },
+        ],
+      },
+      {
       },
       {
         test: /\.tsx?$/,

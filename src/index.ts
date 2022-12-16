@@ -1,3 +1,3 @@
-import './style.scss';
+import './index.scss';
 
-const t = "0;0";
+console.log(`I'm working...`);
