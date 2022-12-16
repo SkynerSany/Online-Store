@@ -1,4 +1,4 @@
-function stringToElement(htmlString: string) {
+function stringToElement(htmlString: string): HTMLTemplateElement {
   const template = document.createElement('template');
   if (htmlString) {
     template.innerHTML = htmlString;

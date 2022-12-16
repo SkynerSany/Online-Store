@@ -28,6 +28,7 @@ const baseConfig = {
                 'src/styles/vars.scss',
                 'src/styles/mixins.scss',
                 'src/styles/normalize.scss',
+                'src/styles/fonts.scss',
               ],
             },
           },
