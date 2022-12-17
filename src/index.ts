@@ -1,3 +1,6 @@
 import './index.scss';
+import App from './pages/app/app';
 
-console.log(`I'm working...`);
+const app = new App();
+
+app.run();
