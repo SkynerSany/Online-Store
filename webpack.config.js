@@ -10,6 +10,15 @@ const baseConfig = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: { minimize: false },
+          },
+        ],
+      },
+      {
         test: /\.scss$/,
         use: [
           { loader: MiniCssExtractPlugin.loader },
@@ -25,10 +34,9 @@ const baseConfig = {
             loader: 'sass-resources-loader',
             options: {
               resources: [
-                'src/styles/vars.scss',
-                'src/styles/mixins.scss',
-                'src/styles/normalize.scss',
-                'src/styles/fonts.scss',
+                './src/styles/vars.scss',
+                './src/styles/mixins.scss',
+                './src/styles/normalize.scss',
               ],
             },
           },
