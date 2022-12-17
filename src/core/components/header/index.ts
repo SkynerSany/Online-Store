@@ -5,7 +5,7 @@ const header = `<header class="header">
                   <nav class="header__nav">
                     <a href="#main-page">Главная страница</a>
                     <a href="#product-page">Страница продукта</a>
-                    <a href="#basket-page">Страница корзины</a>
+                    <a href="#cart-page">Страница корзины</a>
                   </nav>
                 </header>`;
 

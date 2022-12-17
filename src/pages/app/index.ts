@@ -1,4 +1,4 @@
-import BasketPage from "../basket";
+import CartPage from "../cart";
 import MainPage from "../main";
 import ProductPage from "../product";
 import Page from "../../core/templates/page";
@@ -7,7 +7,7 @@ import ErrorPage, { ErrorTypes } from "../error";
 
 export const enum PageIds {
   Main = 'main-page',
-  Basket = 'basket-page',
+  Basket = 'cart-page',
   Product = 'product-page',
 }
 
@@ -30,8 +30,8 @@ class App {
 
     if (idPage === 'main-page') {
       page = new MainPage(idPage);
-    } else if (idPage === 'basket-page') {
-      page = new BasketPage(idPage);
+    } else if (idPage === 'cart-page') {
+      page = new CartPage(idPage);
     } else if (idPage === 'product-page') {
       page = new ProductPage(idPage);
     } else {
