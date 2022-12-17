@@ -1,5 +1,5 @@
 import Page from "../../core/templates/page";
-import './index.scss';
+import './error.scss';
 
 export const enum ErrorTypes {
   Error_404 = 404,

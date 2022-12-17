@@ -1,15 +1,10 @@
-import CartPage from "../cart";
-import MainPage from "../main";
-import ProductPage from "../product";
+import CartPage from "../cart/cart";
+import MainPage from "../main/main";
+import ProductPage from "../product/product";
 import Page from "../../core/templates/page";
-import headerElement from "../../core/components/header";
-import ErrorPage, { ErrorTypes } from "../error";
+import ErrorPage, { ErrorTypes } from "../error/error";
 
-export const enum PageIds {
-  Main = 'main-page',
-  Basket = 'cart-page',
-  Product = 'product-page',
-}
+type PageType = MainPage | CartPage | ProductPage;
 
 class App {
   private static container: HTMLElement = document.body;
@@ -28,21 +23,19 @@ class App {
 
     let page: Page | null = null;
 
-    if (idPage === 'main-page') {
-      page = new MainPage(idPage);
-    } else if (idPage === 'cart-page') {
-      page = new CartPage(idPage);
-    } else if (idPage === 'product-page') {
-      page = new ProductPage(idPage);
-    } else {
-      page = new ErrorPage(idPage, ErrorTypes.Error_404);
+    const obj: {[prop: string]: () => PageType} = {
+      'main-page': () => new MainPage('main-page'),
+      'cart-page': () => new CartPage('cart-page'),
+      'product-page': () => new ProductPage('product-page'),
     }
 
-    if (page) {
-      const pageHTML = page.render();
-      pageHTML.id = App.defaultPageId;
-      App.container.append(pageHTML);
-    }
+    page = obj[idPage] ? obj[idPage]() : new ErrorPage(idPage, ErrorTypes.Error_404);
+
+    if (!page) return;
+
+    const pageHTML = page.render();
+    pageHTML.id = App.defaultPageId;
+    App.container.append(pageHTML);
   }
 
   constructor() {
@@ -59,11 +52,9 @@ class App {
   // ===============================
 
   run() {
-    App.container.append(headerElement);
     App.renderNewPage('main-page');
     this.enableRouteChange();
   }
 }
-console.log(headerElement);
 
 export default App;

@@ -2,7 +2,7 @@ import Page from "../../core/templates/page";
 
 class CartPage extends Page {
   static TextObject = {
-    title: 'Bascet Page',
+    title: 'Cart Page',
   }
 
   render() {
