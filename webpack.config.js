@@ -34,9 +34,9 @@ const baseConfig = {
             loader: 'sass-resources-loader',
             options: {
               resources: [
-                'src/styles/vars.scss',
-                'src/styles/mixins.scss',
-                'src/styles/normalize.scss',
+                './src/styles/vars.scss',
+                './src/styles/mixins.scss',
+                './src/styles/normalize.scss',
               ],
             },
           },
