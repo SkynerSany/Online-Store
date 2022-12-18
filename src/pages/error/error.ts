@@ -1,4 +1,6 @@
+import stringToElement from '../../utils/htmlToElement';
 import Page from "../../core/templates/page";
+import ERRORPAGETEMPLATE from "./error.template";
 import './error.scss';
 
 export const enum ErrorTypes {
@@ -9,18 +11,15 @@ class ErrorPage extends Page {
 
   private errorType: ErrorTypes | string;
 
-  static TextObject: { [prop: string]: string } = {
-    '404': 'Error! The page was not found...'
-  };
-
   constructor(id:string, errorType: ErrorTypes | string) {
     super(id);
     this.errorType = errorType;
   }
 
+
   render(): HTMLElement {
-    const title = this.createHeaderTitle(ErrorPage.TextObject[this.errorType]);
-    this.container.append(title);
+    const errorPage: HTMLTemplateElement = stringToElement(ERRORPAGETEMPLATE);
+    this.container.append(errorPage);
     return this.container;
   }
 }

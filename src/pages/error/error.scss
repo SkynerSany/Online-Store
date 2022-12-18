@@ -1,0 +1,28 @@
+.error-page {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  background-image: url(../../assets/images/error-page-bg.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.error-page__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: $color-dark-blue;
+}
+
+.error-page__title {
+  font-size: 10rem;
+  font-weight: 900;
+}
+
+.error-page__message {
+  font-size: 2rem;
+  font-weight: 500;
+}
