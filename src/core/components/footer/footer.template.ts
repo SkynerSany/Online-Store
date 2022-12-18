@@ -1,4 +1,4 @@
-const FOOTER_TEMLATE =  `<footer class="footer">
+const FOOTER_TEMPLATE =  `<footer class="footer">
                           <div class="wrapper footer__wrapper">
                             <a href="#main-page" class="footer__logo"></a>
                             <div class="footer__socilal">
@@ -10,4 +10,4 @@ const FOOTER_TEMLATE =  `<footer class="footer">
                           </div>
                         </footer>`;
 
-export default FOOTER_TEMLATE;
+export default FOOTER_TEMPLATE;
