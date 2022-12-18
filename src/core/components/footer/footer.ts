@@ -1,8 +1,7 @@
-// import stringToElement from '../../../utils/htmlToElement';
-// import './index.scss';
+import stringToElement from '../../../utils/htmlToElement';
+import FOOTER_TEMPLATE from './footer.template';
+import './footer.scss';
 
-// const footer = ``;
+const footerElement: HTMLTemplateElement = stringToElement(FOOTER_TEMPLATE);
 
-// const footerElement: HTMLTemplateElement = stringToElement(footer);
-
-// export default footerElement;
+export default footerElement;

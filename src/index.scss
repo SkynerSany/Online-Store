@@ -5,6 +5,22 @@ html {
   font-family: 'Exo 2';
 }
 
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  cursor: default;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 .wrapper {
   width: 95%;
   max-width: 1300px;
