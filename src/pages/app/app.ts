@@ -3,6 +3,7 @@ import MainPage from "../main/main";
 import ProductPage from "../product/product";
 import Page from "../../core/templates/page";
 import headerElement from "../../core/components/header";
+import footerElement from "../../core/components/footer/footer";
 import ErrorPage, { ErrorTypes } from "../error/error";
 
 type PageType = MainPage | CartPage | ProductPage;
@@ -55,6 +56,7 @@ class App {
   run() {
     App.container.append(headerElement);
     App.renderNewPage('main-page');
+    App.container.append(footerElement);
     this.enableRouteChange();
   }
 }
