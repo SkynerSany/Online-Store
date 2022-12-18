@@ -1,6 +1,6 @@
-const FOOTERTEMLATE =  `<footer class="footer">
+const FOOTER_TEMLATE =  `<footer class="footer">
                           <div class="wrapper footer__wrapper">
-                            <a href="#main" class="footer__logo"></a>
+                            <a href="#main-page" class="footer__logo"></a>
                             <div class="footer__socilal">
                               <a href="https://github.com/EfimenkoAndrey" class="footer__social-link author" target="_blank"></a>
                               <a href="https://github.com/SkynerSany" class="footer__social-link author" target="_blank"></a>
@@ -10,4 +10,4 @@ const FOOTERTEMLATE =  `<footer class="footer">
                           </div>
                         </footer>`;
 
-export default FOOTERTEMLATE;
+export default FOOTER_TEMLATE;

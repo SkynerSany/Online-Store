@@ -38,6 +38,7 @@ class App {
     const pageHTML = page.render();
     pageHTML.id = App.defaultPageId;
     App.container.append(pageHTML);
+    App.container.append(footerElement);
   }
 
   constructor() {
