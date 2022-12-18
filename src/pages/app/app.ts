@@ -55,8 +55,10 @@ class App {
   // ===============================
 
   run() {
+    const currentLocation = document.location.hash.slice(1);
+
     App.container.append(headerElement);
-    App.renderNewPage('main-page');
+    App.renderNewPage(currentLocation);
     App.container.append(footerElement);
     this.enableRouteChange();
   }
