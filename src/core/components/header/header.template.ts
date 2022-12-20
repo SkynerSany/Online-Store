@@ -1,4 +1,4 @@
-const HEADERTEMLATE =  `<header class="header">
+const HEADER_TEMLATE =  `<header class="header">
                           <div class="wrapper header__wrapper">
                             <a href="#main-page" class="header__logo"></a>
                             <div class="header__contact">
@@ -13,4 +13,4 @@ const HEADERTEMLATE =  `<header class="header">
                           </div>
                         </header>`
 
-export default HEADERTEMLATE;
+export default HEADER_TEMLATE;

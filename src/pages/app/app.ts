@@ -3,7 +3,7 @@ import MainPage from "../main/main";
 import ProductPage from "../product/product";
 import CatalogPage from "../catalog/catalog";
 import Page from "../../core/templates/page";
-import headerElement from "../../core/components/header";
+import headerElement from "../../core/components/header/header";
 import footerElement from "../../core/components/footer/footer";
 import ErrorPage, { ErrorTypes } from "../error/error";
 
