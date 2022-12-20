@@ -1,4 +1,15 @@
- html {
+:root {
+  box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+
+html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
 }
@@ -32,6 +43,7 @@ pre {
 a {
   background-color: transparent;
   text-decoration: none;
+  color: $text-color-white;
 }
 
 abbr[title] {
@@ -180,3 +192,15 @@ template {
 [hidden] {
   display: none;
 }
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+

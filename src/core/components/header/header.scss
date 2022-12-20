@@ -1,13 +1,13 @@
-.header {
-  height: 80px;
-  display: flex;
-  justify-content: center;
-}
-
-.header__wrapper {
+.header__top-row {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: auto;
+  width: 100%;
+  padding: 0 50px;
+  background-color: #fff;
+  z-index: 2;
 }
 
 .header__logo {
@@ -71,4 +71,126 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+}
+
+// Box header__menu
+
+.header__bottom-row {
+  width: 100%;
+  height: 60px;
+  padding: 0 50px;
+  color: $text-color-white;
+  background-color: #0E1821;
+}
+
+.header__main-menu {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  margin: auto;
+  z-index: 1;
+}
+
+.header__main-nav {
+  position: relative;
+  justify-content:  center;
+  width: 320px;
+  min-height: 60px;
+  padding-left: 20px;
+  background-color: #243C53;
+  cursor: pointer;
+  transition: all .3s linear;
+}
+
+.header__menu {
+  // display: none;
+  position: absolute;
+  top: -180px;
+  left: 0;
+  z-index: -1;
+  transition: all .25s;
+  @media screen and (max-width: 530px) {
+    top: 60px;
+    left: -360px;
+  }
+}
+
+.header__burger-img {
+  width: 32px;
+  height: 32px;
+  background-image: url('../../../assets/images/svg/header/menu-icon.svg');
+  transition: all .25s;
+}
+
+.menu-active {
+  transform: rotate(90deg);
+}
+
+.header__menu_active {
+  display: block;
+  top: 60px;
+  @media screen and (max-width: 530px) {
+    left: -10px;
+  }
+}
+
+.header__menu-name {
+  @include centerElement;
+  margin-left: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  width: 320px;
+  height: 48px;
+  padding-left: 20px;
+  background-color: $color-menu-burger;
+  transition: all .2s linear;
+  a {
+    color: $text-menu-item;
+  }
+}
+
+.menu-item:hover {
+  background-color: #c0d1df;
+}
+
+.header__sub-nav {
+  width: 80%;
+  max-width: 180px;
+  margin-left: auto;
+}
+
+.header__sub-menu {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media(max-width: 880px) {
+  .wrapper {
+    padding: 0;
+  }
+
+  .header__top-row,
+  .header__bottom-row {
+    padding: 0 10px;
+  }
+}
+
+@media(max-width: 530px) {
+  .header__menu-name {
+    display: none;
+  }
+
+  .header__main-nav {
+    width: fit-content;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .header__sub-nav {
+    margin-left: 5px;
+  }
 }

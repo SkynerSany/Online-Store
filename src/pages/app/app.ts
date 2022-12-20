@@ -2,7 +2,7 @@ import CartPage from "../cart/cart";
 import MainPage from "../main/main";
 import ProductPage from "../product/product";
 import Page from "../../core/templates/page";
-import headerElement from "../../core/components/header";
+import headerElement, { addActiveClasess } from "../../core/components/header";
 import footerElement from "../../core/components/footer/footer";
 import ErrorPage, { ErrorTypes } from "../error/error";
 
@@ -30,6 +30,11 @@ class App {
       'cart-page': () => new CartPage('cart-page'),
       'product-page': () => new ProductPage('product-page'),
     }
+
+    const menuBtn = document.querySelector('.header__burger-menu')as HTMLElement;
+    menuBtn.addEventListener('click', () => {
+      addActiveClasess();
+    });
 
     page = obj[idPage] ? obj[idPage]() : new ErrorPage(idPage, ErrorTypes.Error_404);
 
