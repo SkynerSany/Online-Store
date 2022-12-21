@@ -104,7 +104,6 @@
 }
 
 .header__menu {
-  // display: none;
   position: absolute;
   top: -180px;
   left: 0;
@@ -136,7 +135,7 @@
 }
 
 .header__menu-name {
-  @include centerElement;
+  @include centeringOfElements;
   margin-left: 10px;
 }
 

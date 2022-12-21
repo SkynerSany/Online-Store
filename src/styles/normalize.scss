@@ -9,6 +9,17 @@
 }
 
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -191,16 +202,5 @@ template {
 
 [hidden] {
   display: none;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-
-* {
-  margin: 0;
-  padding: 0;
 }
 
