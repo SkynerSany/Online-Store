@@ -6,7 +6,7 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                   <div class="filter filter-range">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Цена, р</p>
-                                      <div class="filter__show">▲</div>
+                                      <div class="filter__show"></div>
                                     </div>
                                     <div class="filter-range__numbers-container">
                                       <div class="filter-range__numbers">
@@ -24,7 +24,7 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                   <div class="filter filter-range">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Колличество на складе</p>
-                                      <div class="filter__show">▲</div>
+                                      <div class="filter__show"></div>
                                     </div>
                                     <div class="filter-range__numbers-container">
                                       <div class="filter-range__numbers">
@@ -45,26 +45,16 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                       <div class="filter__show"></div>
                                     </div>
                                     <div class="filter-checkbox__container">
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        asd
-                                      </label>
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        adfs
-                                      </label>
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        dgdfd
-                                      </label>
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        hjghdg
-                                      </label>
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        f;erjrf;sm
-                                      </label>
+                                      <input type="checkbox" id="category" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="category">asd</label>
+                                      <input type="checkbox" id="category1" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="category1">adfs</label>
+                                      <input type="checkbox" id="category2" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="category2">dgdfd</label>
+                                      <input type="checkbox" id="category3" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="category3">hjghdg</label>
+                                      <input type="checkbox" id="category4" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="category4">f;erjrf;sm</label>
                                     </div>
                                   </div>
                                   <div class="filter filter-checkbox">
@@ -73,35 +63,35 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                       <div class="filter__show"></div>
                                     </div>
                                     <div class="filter-checkbox__container">
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        400
-                                      </label>
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        500
-                                      </label>
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        600
-                                      </label>
-                                      <label class="filter-checkbox__label">
-                                        <input type="checkbox" name="" id="" class="filter-checkbox__checkbox">
-                                        700
-                                      </label>
+                                      <input type="checkbox" id="brend" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="brend">400</label>
+                                      <input type="checkbox" id="brend1" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="brend1">500</label>
+                                      <input type="checkbox" id="brend2" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="brend2">600</label>
+                                      <input type="checkbox" id="brend3" class="filter-checkbox__checkbox">
+                                      <label class="filter-checkbox__label" for="brend3">700</label>
                                     </div>
                                   </div>
                                 </section>
                                 <section class="products">
                                   <div class="products__header">
-                                    <div class="products__filters-list"></div>
-                                    <div class="products__sort-container"></div>
+                                    <div class="products__filters-list">
+                                      <div class="current-filter">
+                                        <p class="current-filter__name">Подсветка: есть</p>
+                                        <button class="current-filter__remove"></button>
+                                      </div>
+                                      <button class="current-filter__clear">Очистить фильтры</button>
+                                    </div>
+                                    <div class="products__sort-container">
+                                      <p class="products__sort-title">Сначала дорогие</p>
+                                      <div class="products__sort-show"></div>
+                                    </div>
                                   </div>
-                                  <div class="products__container">
-                                  </div>
+                                  <div class="products__container"></div>
                                   <div class="pagination">
                                     <div class="pagination__btn"><</div>
-                                    <div class="pagination__btn">1</div>
+                                    <div class="pagination__btn pagination__btn-active">1</div>
                                     <div class="pagination__btn">2</div>
                                     <div class="pagination__btn">3</div>
                                     <div class="pagination__btn">></div>

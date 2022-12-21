@@ -1,0 +1,295 @@
+.catalog {
+  display: flex;
+  justify-content: center;
+}
+
+.catalog__wrapper {
+
+}
+
+.catalog__title {
+  margin: 30px 0;
+
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.catalog__container {
+  display: grid;
+  grid-template-columns: 310px auto;
+  gap: 15px;
+}
+
+.filters {
+  width: 310px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-range {
+
+}
+
+.filter__title-container {
+  height: 40px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $color-light-blue;
+  border-radius: 4px;
+  
+  cursor: pointer;
+}
+
+.filter__name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.filter__show,
+.products__sort-show {
+  width: 13px;
+  height: 8px;
+
+  background-image: url(../../assets/icons/arrow.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.filter-range__numbers-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1rem;
+  color: $text-color-medium;
+
+  input {
+    width: 110px;
+    height: 45px;
+    padding: 10px 10px 10px 20px;
+
+    color: $text-color-medium;
+
+    border: 1px solid $text-color-medium;
+    border-radius: 4px;
+
+    &::placeholder {
+      color: $text-color-medium;
+    }
+  }
+}
+
+.filter-range__numbers {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-range__input-container {
+
+}
+
+.filter-range__range {
+  width: 100%;
+}
+
+.filters__confirm {
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text-color-white;
+  
+  background: $color-blue;
+  border-radius: 4px;
+
+  transition: background-color $duration-fast linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-dark-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.filter-checkbox__container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-checkbox__label {
+  display: flex;
+  align-items: center;
+
+  font-size: 1rem;
+  font-weight: 400;
+  color: $text-color-darknes;
+
+  cursor: pointer;
+
+  &::before {
+    content: '';
+  
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5em;
+    display: inline-block;
+    flex-shrink: 0;
+    flex-grow: 0;
+    box-sizing: border-box;
+  
+    border: 1px solid $text-color-medium;
+    border-radius: 0.25em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+  }
+}
+
+.filter-checkbox__checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+
+  &:checked {
+    +.filter-checkbox__label::before {
+      border: none;
+      background-image: url(../../assets/icons/checkbox.svg);
+      background-size: inherit;
+    }
+  }
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+}
+
+.products__header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.products__filters-list {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.current-filter__clear {
+  text-decoration: underline;
+  color: $color-red;
+
+  cursor: pointer;
+}
+
+.current-filter {
+  width: fit-content;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  background-color: $color-light-blue;
+  border-radius: 100px;
+
+  cursor: pointer;
+}
+
+.current-filter__remove {
+  width: 10px;
+  height: 14px;
+
+  background-image: url(../../assets/icons/x.svg);
+
+  cursor: inherit;
+}
+
+.current-filter__name {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: $text-color-darknes;
+}
+
+.products__sort-container {
+  width: 240px;
+  height: 50px;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid $color-light-grey;
+  border-radius: 4px;
+  
+  cursor: pointer;
+}
+
+.products__sort-title {
+  color: $text-color-darknes;
+}
+
+.products__sort-show {
+  transform: rotate(180deg);
+}
+
+.products__container {
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.pagination {
+  margin-bottom: 80px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination__btn {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1rem;
+  font-weight: 400;
+  color: $text-color-medium;
+
+  border: 1px solid $color-light-grey;
+  border-radius: 4px;
+
+  user-select: none;
+  cursor: pointer;
+
+  &-active {
+    color: $text-color-white;
+
+    background-color: $color-blue;
+  }
+
+  &:hover:not(&-active) {
+    background-color: $color-light-blue;
+  }
+}
