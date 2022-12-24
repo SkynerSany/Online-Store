@@ -20,11 +20,62 @@ const HEADERTEMLATE =  `<header class="header flex-col">
                                     <span class="header__menu-name">Каталог товаров</span>
                                   </div>
                                   <ul class="header__menu">
-                                    <li class="menu-item"><a href="#">Product</a></li>
-                                    <li class="menu-item"><a href="#">Product</a></li>
-                                    <li class="menu-item"><a href="#">Product</a></li>
-                                    <li class="menu-item"><a href="#">Product</a></li>
-                                    <li class="menu-item"><a href="#">Product</a></li>
+                                    <li class="menu-item flex-row">
+                                      <div class="header__menu-icon header__menu-electronic"></div>
+                                      <a href="#">Electronics</a>
+                                      <ul class="list-two">
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-smartphone"></div>
+                                          <a href="#">Smartphones</a>
+                                        </li>
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-laptop"></div>
+                                          <a href="#">Laptops</a>
+                                        </li>
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-tablet"></div>
+                                          <a href="#">Tablets</a>
+                                        </li>
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-watch"></div>
+                                          <a href="#">Smart-wacth</a>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                    <li class="menu-item">
+                                      <div class="header__menu-icon header__menu-home"></div>
+                                      <a href="#">Household products</a>
+                                      <ul class="list-two">
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-electronic"></div>
+                                          <a href="#">Smartphones</a>
+                                        </li>
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-electronic"></div>
+                                          <a href="#">Electronics</a>
+                                        </li>
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-electronic"></div>
+                                          <a href="#">Electronics</a>
+                                        </li>
+                                        <li class="menu-item flex-row">
+                                          <div class="header__menu-icon header__menu-electronic"></div>
+                                          <a href="#">Electronics</a>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                    <li class="menu-item">
+                                      <div class="header__menu-icon header__menu-icon_laptop"></div>
+                                      <a href="#">Fragrances</a>
+                                    </li>
+                                    <li class="menu-item">
+                                      <div class="header__menu-icon header__menu-icon"></div>
+                                      <a href="#">Skincare</a>
+                                    </li>
+                                    <li class="menu-item">
+                                      <div class="header__menu-icon header__menu-icon"></div>
+                                      <a href="#">Groceries</a>
+                                    </li>
                                   </ul>
                                 </nav>
                                 <nav class="header__sub-nav">

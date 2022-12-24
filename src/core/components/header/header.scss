@@ -3,11 +3,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: auto;
   width: 100%;
+  margin: auto;
   padding: 0 50px;
   background-color: #fff;
-  z-index: 2;
+  z-index: 3;
 }
 
 .header__logo {
@@ -63,9 +63,9 @@
 }
 
 .header__cart {
+  display: block;
   width: 30px;
   height: 30px;
-  display: block;
 
   background-image: url(../../../assets/icons/cart.svg);
   background-repeat: no-repeat;
@@ -76,11 +76,13 @@
 // Box header__menu
 
 .header__bottom-row {
+  position: relative;
   width: 100%;
   height: 60px;
   padding: 0 50px;
   color: $text-color-white;
   background-color: #0E1821;
+  z-index: 2;
 }
 
 .header__main-menu {
@@ -89,7 +91,6 @@
   width: 100%;
   height: fit-content;
   margin: auto;
-  z-index: 1;
 }
 
 .header__main-nav {
@@ -107,12 +108,41 @@
   position: absolute;
   top: -180px;
   left: 0;
-  z-index: -1;
+
+  max-height: 240px;
   transition: all .25s;
-  @media screen and (max-width: 530px) {
+  z-index: -1;
+
+   @media screen and (max-width: 530px) {
     top: 60px;
     left: -360px;
   }
+}
+
+.header__menu-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background-size: contain;
+}
+
+.header__menu-electronic {
+  background-image: url('../../../assets/icons/header-menu/electronics.png');
+}
+.header__menu-smartphone {
+  background-image: url('../../../assets/icons/header-menu/smartphone.png');
+}
+.header__menu-laptop {
+  background-image: url('../../../assets/icons/header-menu/laptop.png');
+}
+.header__menu-tablet {
+  background-image: url('./../../../assets/icons/header-menu/tablet.png');
+}
+.header__menu-watch {
+  background-image: url('./../../../assets/icons/header-menu/watch.png');
+}
+.header__menu-home {
+  background-image: url('./../../../assets/icons/header-menu/home-products.png');
 }
 
 .header__burger-img {
@@ -140,6 +170,7 @@
 }
 
 .menu-item {
+  position: relative;
   display: flex;
   align-items: center;
   width: 320px;
@@ -154,6 +185,10 @@
 
 .menu-item:hover {
   background-color: #c0d1df;
+}
+
+.menu-item:hover .list-two {
+  left: 100%;
 }
 
 .header__sub-nav {
@@ -192,4 +227,15 @@
   .header__sub-nav {
     margin-left: 5px;
   }
+}
+
+
+// Menu is out of a few lists
+
+.list-two {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all .2s;
+  z-index: -1;
 }
