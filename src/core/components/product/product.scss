@@ -32,10 +32,11 @@
 }
 
 .product__image {
-  width: 280px;
+  width: -webkit-fill-available;
   height: 220px;
   margin-bottom: 10px;
 
+  border-radius: 4px;
   object-fit: contain;
 }
 
@@ -43,7 +44,7 @@
 
 }
 
-.product__type {
+.product__brand {
   margin-bottom: 10px;
 
   font-size: 1rem;
@@ -52,7 +53,6 @@
 }
 
 .product__name {
-  height: 80px;
   margin-bottom: 20px;
   
   font-size: 1.25rem;
@@ -86,13 +86,14 @@
 }
 
 .product__btns {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 50px;
   align-items: center;
   gap: 10px;
+
 }
 
 .product__buy {
-  width: 230px;
   height: 50px;
 
   display: flex;
@@ -107,11 +108,20 @@
   border: 1px solid $color-blue;
   border-radius: 4px;
 
+  transition: background-color $duration-fast linear;
+
   cursor: pointer;
+
+  &:hover {
+    background-color: $color-light-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
 .product__add {
-  width: 50px;
   height: 50px;
 
   background-image: url(../../../assets/icons/cart-white.svg);
@@ -121,10 +131,20 @@
   background-position: center;
   border-radius: 4px;
 
+  transition: background-color $duration-fast linear;
+
   cursor: pointer;
 
   &-active {
     background-image: url(../../../assets/icons/cart-blue.svg);
     background-color: $color-light-blue;
+  }
+
+  &:hover:not(&-active) {
+    background-color: $color-dark-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }

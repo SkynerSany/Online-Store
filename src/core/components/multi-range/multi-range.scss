@@ -1,0 +1,49 @@
+.multi-range__range {
+  position: absolute;
+  
+  width: 95%;
+
+  appearance: none;
+  background: linear-gradient($color-blue, $color-blue) no-repeat center;
+  background-size: 100% 6px;
+
+  pointer-events: none;
+
+  &:nth-child(1) {
+    &::-webkit-slider-thumb::before {
+      background-color: red;
+    }
+  }
+
+  &:nth-child(2) {
+    background: none;
+
+    &::-webkit-slider-thumb::before {
+      background-color: grey;
+    }
+  }
+
+  &::-webkit-slider-thumb {
+    position: relative;
+
+    height: 20px;
+    width: 20px;
+    margin: 5px 0;
+
+    appearance: none;
+    border-radius: 50%;
+    background-color: $color-blue;
+
+    cursor: pointer;
+    pointer-events: all;
+  }
+}
+
+.multi-range {
+  position: relative;
+
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
