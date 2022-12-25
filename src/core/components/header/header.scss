@@ -101,7 +101,6 @@
   padding-left: 20px;
   background-color: #243C53;
   cursor: pointer;
-  transition: all .3s linear;
 }
 
 .header__menu {
@@ -109,9 +108,9 @@
   top: -180px;
   left: 0;
 
-  max-height: 240px;
-  transition: all .25s;
+  max-height: fit-content;
   z-index: -1;
+  transition: top .2s;
 
    @media screen and (max-width: 530px) {
     top: 60px;
@@ -149,7 +148,7 @@
   width: 32px;
   height: 32px;
   background-image: url('../../../assets/images/svg/header/menu-icon.svg');
-  transition: all .25s;
+  transition: transform .25s;
 }
 
 .menu-active {
@@ -177,7 +176,6 @@
   height: 48px;
   padding-left: 20px;
   background-color: $color-menu-burger;
-  transition: all .2s linear;
   a {
     color: $text-menu-item;
   }
@@ -188,6 +186,7 @@
 }
 
 .menu-item:hover .list-two {
+  visibility: visible;
   left: 100%;
 }
 
@@ -229,13 +228,13 @@
   }
 }
 
-
 // Menu is out of a few lists
 
 .list-two {
+  visibility: collapse;
   position: absolute;
   top: 0;
   left: 0;
-  transition: all .2s;
+  transition: left .2s linear;
   z-index: -1;
 }

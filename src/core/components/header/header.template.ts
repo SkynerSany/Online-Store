@@ -64,18 +64,6 @@ const HEADERTEMLATE =  `<header class="header flex-col">
                                         </li>
                                       </ul>
                                     </li>
-                                    <li class="menu-item">
-                                      <div class="header__menu-icon header__menu-icon_laptop"></div>
-                                      <a href="#">Fragrances</a>
-                                    </li>
-                                    <li class="menu-item">
-                                      <div class="header__menu-icon header__menu-icon"></div>
-                                      <a href="#">Skincare</a>
-                                    </li>
-                                    <li class="menu-item">
-                                      <div class="header__menu-icon header__menu-icon"></div>
-                                      <a href="#">Groceries</a>
-                                    </li>
                                   </ul>
                                 </nav>
                                 <nav class="header__sub-nav">
