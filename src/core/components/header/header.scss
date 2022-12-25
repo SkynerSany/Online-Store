@@ -1,6 +1,7 @@
 .header {
   font-size: 1.6rem;
 }
+
 .header__top-row {
   position: relative;
   display: flex;
@@ -113,11 +114,12 @@
 
   max-height: fit-content;
   z-index: -1;
-  transition: top, left .2s;
+  transition: top .2s;
 
    @media screen and (max-width: 530px) {
     top: 6rem;
     left: -36rem;
+    transition: left .2s;
   }
 }
 
