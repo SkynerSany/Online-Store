@@ -23,7 +23,7 @@ export const removeActiveClassesForMenu = (): void => {
 }
 
 export const addListenerForMenu = ():void => {
-  const menuBtn = document.querySelector('.header__burger-menu');
+  const menuBtn = document.querySelector('.header__main-nav');
   if (menuBtn instanceof HTMLElement) {
     menuBtn.addEventListener('click', () => {
       toggleActiveClasessForMenu();
