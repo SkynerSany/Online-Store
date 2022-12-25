@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800&display=swap');
 
 html {
-  font-size: 16px;
+  font-size: 10px;
   font-family: 'Exo 2';
 }
 
@@ -32,13 +32,13 @@ main {
 
 .wrapper {
   width: 100%;
-  padding: 0 50px;
+  padding: 0 5rem;
 
   @media screen and (max-width: $large) {
-    max-width: 728px;
+    max-width: 70.28rem;
   }
 
   @media screen and (max-width: $small) {
-    max-width: 280px;
+    max-width: 28rem;
   }
 }
