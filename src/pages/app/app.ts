@@ -2,7 +2,7 @@ import CartPage from "../cart/cart";
 import MainPage from "../main/main";
 import ProductPage from "../product/product";
 import Page from "../../core/templates/page";
-import headerElement from "../../core/components/header";
+import headerElement, { removeActiveClassesForMenu, addListenerForMenu } from "../../core/components/header";
 import footerElement from "../../core/components/footer/footer";
 import ErrorPage, { ErrorTypes } from "../error/error";
 
@@ -36,8 +36,10 @@ class App {
     if (!page) return;
 
     const pageHTML = page.render();
+
     pageHTML.id = App.defaultPageId;
     App.container.append(pageHTML);
+    removeActiveClassesForMenu();
     App.container.append(footerElement);
   }
 
@@ -58,7 +60,8 @@ class App {
     const currentLocation = document.location.hash.slice(1);
 
     App.container.append(headerElement);
-    App.renderNewPage(currentLocation);
+    addListenerForMenu();
+    App.renderNewPage(!currentLocation.length ? 'main-page' : currentLocation);
     App.container.append(footerElement);
     this.enableRouteChange();
   }
