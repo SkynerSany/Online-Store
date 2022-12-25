@@ -1,4 +1,5 @@
 .footer {
+  height: 8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +15,7 @@
 }
 
 .footer__logo {
-  width: 155px;
+  width: 15.5rem;
   aspect-ratio: 4/1;
 
   background-image: url(../../../assets/icons/logo.svg);
@@ -28,11 +29,11 @@
 
 .footer__socilal {
   display: flex;
-  gap: 20px;
+  gap: 2rem;
 }
 
 .footer__social-link {
-  height: 45px;
+  height: 5rem;
   display: block;
 
   -webkit-mask-size: contain;
@@ -42,7 +43,7 @@
   transition: all $duration-fast linear;
 
   &.author {
-    width: 45px;
+    width: 5rem;
 
     background-color: $color-blue;
     mask-image: url(../../../assets/icons/github.svg);
@@ -54,7 +55,7 @@
   }
 
   &.course {
-    width: 120px;
+    width: 13rem;
 
     background-image: url(../../../assets/icons/rs_school.svg);
   }

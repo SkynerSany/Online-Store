@@ -1,17 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800&display=swap');
 
-* {
-  box-sizing: border-box;
-}
-
 html {
   font-family: 'Exo 2';
-  font-size: 16px;
+  font-size: 10px;
 }
 
 html,
 body {
   height: 100%;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
 }
 
 body {
@@ -27,13 +32,13 @@ main {
 
 .wrapper {
   width: 95%;
-  max-width: 1300px;
+  max-width: 130rem;
 
   @media screen and (max-width: $large) {
-    max-width: 728px;
+    max-width: 70.28rem;
   }
 
   @media screen and (max-width: $small) {
-    max-width: 280px;
+    max-width: 28rem;
   }
 }
