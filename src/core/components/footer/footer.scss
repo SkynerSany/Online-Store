@@ -8,6 +8,7 @@
 }
 
 .footer__wrapper {
+  padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -61,7 +62,7 @@
 }
 
 .footer__date {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: $color-blue;
 
