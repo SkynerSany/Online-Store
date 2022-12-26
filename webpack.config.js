@@ -2,6 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const baseConfig = {
@@ -57,6 +58,10 @@ const baseConfig = {
         test: /.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.json$/,
+        type: 'json',
+    }
     ],
   },
   resolve: {
@@ -71,6 +76,11 @@ const baseConfig = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/data', to: './data' },
+      ],
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),

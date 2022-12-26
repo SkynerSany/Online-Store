@@ -3,7 +3,6 @@ import Page from '../../core/templates/page';
 import MultiRange from '../../core/components/multi-range/multi-range';
 import CATALOG_TEMPLATE from './catalog.template';
 import productElement from '../../core/components/product/product';
-import productsData from '../../data/products.json';
 import './catalog.scss';
 
 const CATALOG_CONTAINER = '.catalog__wrapper';
@@ -26,16 +25,44 @@ const PAGINATION_BTN_TYPE = {
   'ARROW': 'pagination__arrow',
 }
 
-class CatalogPage extends Page {
-  products = productsData.products;
+interface Iproduct {
+  'id': number,
+  'title': string,
+  'description': string,
+  'price': number,
+  'discountPercentage': number,
+  'rating': number,
+  'stock': number,
+  'brand': string,
+  'category': string,
+  'thumbnail': string,
+  'images': string[],
+}
 
-  productsCount = this.products.length;
+interface IproductList {
+  'products': Iproduct[];
+}
+
+class CatalogPage extends Page {
+  products!: Iproduct[];
+  productsCount!: number;
+  pageCount!: number;
   
   productsOnPage = 12;
-
-  pageCount = Math.ceil(this.productsCount / this.productsOnPage);
-
   currentPage = 1;
+
+  private getProductsData(): Promise<void> {
+    return fetch('../../data/products.json')
+      .then(
+        (response) => response.json(),
+        (err) => console.error(err))
+      .then((result: IproductList) => {
+        this.products = result.products;
+        this.productsCount = result.products.length;
+        this.pageCount = Math.ceil(this.productsCount / this.productsOnPage);
+      },
+      (err) => console.error(err));
+  }
 
   private createBtn(num: string, type: string): HTMLDivElement {
     const btn = document.createElement('div');
@@ -46,7 +73,7 @@ class CatalogPage extends Page {
     return btn;
   }
 
-  private setPagination() {
+  private setPagination(): void {
     const paginationContainer = this.container.querySelector('.pagination');
     if (!paginationContainer) return;
     
@@ -127,17 +154,22 @@ class CatalogPage extends Page {
     })
   }
 
+  private setComponents(): void {
+    this.getProductsData()
+      .then(() => {
+        this.setMultiRange();
+        this.setProducts();
+        this.setPagination();
+        this.setCatalogEvents();
+        this.checkCurrentPage();
+      }, 
+      (err) => console.error(err));
+  }
+
   public render(): HTMLElement {
     const catalogPage: HTMLTemplateElement = stringToElement(CATALOG_TEMPLATE);
-
     this.container.append(catalogPage);
-    
-    this.setMultiRange();
-    this.setProducts();
-    this.setPagination();
-    this.setCatalogEvents();
-    this.checkCurrentPage();
-
+    this.setComponents();
     return this.container;
   }
 

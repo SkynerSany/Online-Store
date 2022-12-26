@@ -33,12 +33,4 @@ main {
 .wrapper {
   width: 95%;
   max-width: 130rem;
-
-  @media screen and (max-width: $large) {
-    max-width: 70.28rem;
-  }
-
-  @media screen and (max-width: $small) {
-    max-width: 28rem;
-  }
 }

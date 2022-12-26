@@ -1,6 +1,6 @@
-const HEADER_TEMLATE =  `<header class="header flex-col">
+const HEADER_TEMPLATE =  `<header class="header flex-col">
                           <div class="header__wrap flex-col">
-                            <div class="header__top-row flex-row">
+                            <div class="wrapper header__top-row flex-row">
                               <a href="#main-page" class="header__logo"></a>
                                 <div class="header__contact">
                                   <a href="tel:+375 29 999 99 99" class="header__number">+375 29 999 99 99</a>
@@ -13,7 +13,7 @@ const HEADER_TEMLATE =  `<header class="header flex-col">
                                 </nav>
                             </div>
                             <div class="header__bottom-row flex-row">
-                              <div class="header__main-menu flex-row">
+                              <div class="wrapper header__main-menu flex-row">
                                 <nav class="header__main-nav flex-col">
                                   <div class="header__burger-menu flex-row">
                                     <div class="header__burger-img"></div>
@@ -77,4 +77,4 @@ const HEADER_TEMLATE =  `<header class="header flex-col">
                           </div>
                         </header>`
 
-export default HEADER_TEMLATE;
+export default HEADER_TEMPLATE;
