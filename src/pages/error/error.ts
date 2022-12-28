@@ -1,6 +1,6 @@
 import stringToElement from '../../utils/htmlToElement';
 import Page from "../../core/templates/page";
-import ERRORPAGETEMPLATE from "./error.template";
+import ERROR_PAGE_TEMPLATE from "./error.template";
 import './error.scss';
 
 export const enum ErrorTypes {
@@ -18,7 +18,7 @@ class ErrorPage extends Page {
 
 
   render(): HTMLElement {
-    const errorPage: HTMLTemplateElement = stringToElement(ERRORPAGETEMPLATE);
+    const errorPage: HTMLTemplateElement = stringToElement(ERROR_PAGE_TEMPLATE);
     this.container.append(errorPage);
     return this.container;
   }

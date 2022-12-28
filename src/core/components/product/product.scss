@@ -1,0 +1,143 @@
+.product {
+  position: relative;
+
+  padding: 2rem;
+  
+  border: 0.1rem solid $color-light-grey;
+  border-radius: 0.8rem;
+}
+
+.label {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  padding: 0.5rem 1.5rem;
+
+  font-size: 1.6rem;
+  color: $text-color-white;
+
+  border-radius: 0.4rem;
+
+  &__new {
+    background-color: $color-green;
+  }
+
+  &__hit {
+    background-color: $color-red;
+  }
+}
+
+.product__image {
+  width: 100%;
+  height: 22rem;
+  margin-bottom: 1rem;
+
+  border-radius: 0.4rem;
+  object-fit: contain;
+}
+
+.product__brand {
+  margin-bottom: 1rem;
+
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: $text-color-medium;
+}
+
+.product__name {
+  margin-bottom: 2rem;
+  
+  font-size: 2rem;
+  font-weight: 400;
+  color: $text-color-darknes;
+}
+
+.product__stars {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.star {
+  width: 2rem;
+  height: 2rem;
+
+  background-image: url(../../../assets/icons/star.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
+.product__price {
+  margin-bottom: 2rem;
+
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.product__btns {
+  display: grid;
+  grid-template-columns: auto 5rem;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.product__buy {
+  height: 5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $color-blue;
+  
+  background: $text-color-white;
+  border: 0.1rem solid $color-blue;
+  border-radius: 0.4rem;
+
+  transition: background-color $duration-fast linear;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-light-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.product__add {
+  height: 5rem;
+
+  background-image: url(../../../assets/icons/cart-white.svg);
+  background-color: $color-blue;
+  background-size: 2rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 0.4rem;
+
+  transition: background-color $duration-fast linear;
+
+  cursor: pointer;
+
+  &-active {
+    background-image: url(../../../assets/icons/cart-blue.svg);
+    background-color: $color-light-blue;
+  }
+
+  &:hover:not(&-active) {
+    background-color: $color-dark-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

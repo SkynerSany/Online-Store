@@ -1,8 +1,8 @@
 import stringToElement from '../../../utils/htmlToElement';
-import HEADERTEMLATE from './header.template';
+import HEADER_TEMPLATE from './header.template';
 import './header.scss';
 
-const headerElement: HTMLTemplateElement = stringToElement(HEADERTEMLATE);
+const headerElement: HTMLTemplateElement = stringToElement(HEADER_TEMPLATE);
 
 const toggleActiveClasessForMenu = ():void => {
   const headerMenu = document.querySelector('.header__menu');
