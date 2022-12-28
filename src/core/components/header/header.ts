@@ -27,6 +27,7 @@ export const addListenerForMenu = ():void => {
   if (menuBtn instanceof HTMLElement) {
     menuBtn.addEventListener('click', () => {
       toggleActiveClasessForMenu();
+      window.location.hash = '#catalog-page';
     });
     const arrMenuItems = document.querySelectorAll('.menu-item');
     arrMenuItems.forEach((elem) => {

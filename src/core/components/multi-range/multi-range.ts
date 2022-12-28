@@ -1,3 +1,5 @@
+import stringToElement from '../../../utils/htmlToElement';
+import MULTI_RANGE_TEMLATE from './multi-range.template';
 import './multi-range.scss';
 
 const THUMB_WIDTH = 3;
@@ -10,66 +12,71 @@ const INPUT_TYPE = {
 }
 
 export default class MultiRange {
-  private lowerSlider: HTMLInputElement;
-
-  private upperSlider: HTMLInputElement;
-
   private idName: string;
+  private multiRange: HTMLTemplateElement;
 
   constructor(idName: string) {
     this.idName = idName;
-    this.lowerSlider = document.createElement('input');
-    this.upperSlider = document.createElement('input');
+    this.multiRange = stringToElement(MULTI_RANGE_TEMLATE);
   }
 
-  private createInput(type: string): void {
-    const input = type === INPUT_TYPE.LOWER ? this.lowerSlider : this.upperSlider;
-    input.setAttribute('type', 'range');
-    input.setAttribute('min', MIN_VALUE);
-    input.setAttribute('max', MAX_VALUE);
-    input.setAttribute('value', type === INPUT_TYPE.LOWER ? MIN_VALUE : MAX_VALUE);
-    input.className = BASE_CLASS;
-    input.id = `${this.idName}-${type}`;
+  private setInputsId(): HTMLInputElement[] {
+    const [lowerRange, upperRange]: HTMLInputElement[] = Array.from(this.multiRange.querySelectorAll('.multi-range__range'));
+
+    lowerRange.id = `${ this.idName }-lower`;
+    upperRange.id = `${ this.idName }-upper`;
+
+    return [lowerRange, upperRange];
   }
 
-  private getValue(): number[] {
-    const lowerVal = parseInt(this.lowerSlider.value, 10);
-    const upperVal = parseInt(this.upperSlider.value, 10);
-
-    return [lowerVal, upperVal];
-  }
-
-  private changeLoverSlider(): void {
-    const [lowerVal, upperVal] = this.getValue();
+  private changeLowerRange(lower: HTMLInputElement, upper: HTMLInputElement) {
+    const [lowerRange, upperRange] = [lower, upper];
     
-    if (upperVal < lowerVal + THUMB_WIDTH) {
-      this.lowerSlider.value = `${upperVal - THUMB_WIDTH}`;
-      
-      if (lowerVal === +this.lowerSlider.min) {
-        this.upperSlider.value = `${THUMB_WIDTH}`;
-      }
-    }
-  }
+    lowerRange.value = `${ Math.min(+lowerRange.value, +upperRange.value - 1) }`;
 
-  private changeUpperSlider() {
-    const [lowerVal, upperVal] = this.getValue();
+    const value = Math.round((+lowerRange.value / parseInt(lowerRange.max, 10)) * 100);
+
+    const inverseLeft = this.multiRange.querySelector('.multi-range__inverse-left');
+    const track = this.multiRange.querySelector('.multi-range__track');
+    const leftThumb = this.multiRange.querySelectorAll('.multi-range__thumb')[0];
+
+    if (inverseLeft instanceof HTMLElement) inverseLeft.style.width = `${ value }%`;
+    if (track instanceof HTMLElement) track.style.left = `${ value }%`;
+    if (leftThumb instanceof HTMLElement) leftThumb.style.left = `${ value }%`;
+
+    const inputFrom = document.querySelector(`#${ this.idName }-from`);
+    if (!(inputFrom instanceof HTMLInputElement)) return;
     
-    if (lowerVal > upperVal - THUMB_WIDTH) {
-      this.upperSlider.value = `${lowerVal + THUMB_WIDTH}`;
-      
-      if (upperVal === +this.upperSlider.max) {
-        this.lowerSlider.value = `${parseInt(this.upperSlider.max, 10) - THUMB_WIDTH}`;
-      }
-    }
+    inputFrom.value = `${ value }`;
   }
 
-  public set(): HTMLInputElement[] {
-    this.createInput(INPUT_TYPE.UPPER);
-    this.createInput(INPUT_TYPE.LOWER);
+  private changeUpperRange(lower: HTMLInputElement, upper: HTMLInputElement) {
+    const [lowerRange, upperRange] = [lower, upper];
+    
+    upperRange.value = `${ Math.max(+upperRange.value, +lowerRange.value + 1) }`;
 
-    this.lowerSlider.addEventListener('input', () => this.changeLoverSlider());
-    this.upperSlider.addEventListener('input', () => this.changeUpperSlider());
+    const value = Math.round((+upperRange.value / parseInt(upperRange.max, 10)) * 100);
 
-    return [this.lowerSlider, this.upperSlider];
+    const inverseRight = this.multiRange.querySelector('.multi-range__inverse-right');
+    const track = this.multiRange.querySelector('.multi-range__track');
+    const rightThumb = this.multiRange.querySelectorAll('.multi-range__thumb')[1];
+
+    if (inverseRight instanceof HTMLElement) inverseRight.style.width = `${ 100 - value }%`;
+    if (track instanceof HTMLElement) track.style.right = `${ 100 - value }%`;
+    if (rightThumb instanceof HTMLElement) rightThumb.style.left = `${ value }%`;
+
+    const inputTo = document.querySelector(`#${ this.idName }-to`);
+    if (!(inputTo instanceof HTMLInputElement)) return;
+    
+    inputTo.value = `${ value }`;
+  }
+
+  public set(): HTMLTemplateElement {
+    const [lowerRange, upperRange] = this.setInputsId();
+
+    lowerRange.addEventListener('input', () => {this.changeLowerRange(lowerRange, upperRange)})
+    upperRange.addEventListener('input', () => {this.changeUpperRange(lowerRange, upperRange)})
+
+    return this.multiRange;
   }
 }

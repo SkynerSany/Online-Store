@@ -9,10 +9,10 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="filter-range__numbers-container">
                                       <div class="filter-range__numbers">
-                                        от <input type="number" class="filter-range__from">
+                                        от <input type="number" id="price-from" class="filter-range__from" value="0">
                                       </div>
                                       <div class="filter-range__numbers">
-                                        до <input type="number" class="filter-range__to">
+                                        до <input type="number" id="price-to" class="filter-range__to" value="100">
                                       </div>
                                     </div>
                                     <div class="multi-range filter-range__multi-range">
@@ -25,10 +25,10 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="filter-range__numbers-container">
                                       <div class="filter-range__numbers">
-                                        от <input type="number" class="filter-range__from">
+                                        от <input type="number" id="stock-from" class="filter-range__from" value="0">
                                       </div>
                                       <div class="filter-range__numbers">
-                                        до <input type="number" class="filter-range__to">
+                                        до <input type="number" id="stock-to" class="filter-range__to" value="100">
                                       </div>
                                     </div>
                                     <div class="multi-range filter-range__multi-range">

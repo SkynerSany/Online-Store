@@ -148,9 +148,8 @@ class CatalogPage extends Page {
   private setMultiRange(): void {
     const allMultiRange = Array.from(this.container.querySelectorAll(MULTI_RANGE_CONTAINER));
     allMultiRange.forEach((rangeContainer, i) => {
-      const ranges = new MultiRange(MULTI_RAMGE_TYPES[i]).set();
-      rangeContainer.append(ranges[0]);
-      rangeContainer.append(ranges[1]);
+      const range = new MultiRange(MULTI_RAMGE_TYPES[i]).set();
+      rangeContainer.append(range);
     })
   }
 
