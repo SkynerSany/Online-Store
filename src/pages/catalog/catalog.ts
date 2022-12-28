@@ -4,6 +4,7 @@ import MultiRange from '../../core/components/multi-range/multi-range';
 import CATALOG_TEMPLATE from './catalog.template';
 import productElement from '../../core/components/product/product';
 import './catalog.scss';
+import DropdownList from '../../core/components/dropdown-list/dropdown-list';
 
 const CATALOG_CONTAINER = '.catalog__wrapper';
 const PRODUCTS_CONTAINER = '.products__container';
@@ -153,10 +154,17 @@ class CatalogPage extends Page {
     })
   }
 
+  private setDropdownList(): void {
+    const sortContainer = document.querySelector('.products__sort-container');
+    const dropdown = new DropdownList().set();
+    sortContainer?.append(dropdown);
+  }
+
   private setComponents(): void {
     this.getProductsData()
       .then(() => {
         this.setMultiRange();
+        this.setDropdownList();
         this.setProducts();
         this.setPagination();
         this.setCatalogEvents();

@@ -81,9 +81,8 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                       </div>
                                       <button class="current-filter__clear">Очистить фильтры</button>
                                     </div>
-                                    <div class="products__sort-container">
+                                    <div class="products__sort-container dropdown-list">
                                       <p class="products__sort-title">Сначала дорогие</p>
-                                      <div class="products__sort-show"></div>
                                     </div>
                                   </div>
                                   <div class="products__container"></div>
