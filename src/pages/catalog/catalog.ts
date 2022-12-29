@@ -159,7 +159,7 @@ class CatalogPage extends Page {
     const dropdown = new DropdownList().set();
     sortContainer?.append(dropdown);
   }
-
+  
   private setComponents(): void {
     this.getProductsData()
       .then(() => {
