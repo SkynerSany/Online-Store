@@ -28,8 +28,9 @@ body {
 
 main {
   width: 100%;
+  max-width: 128rem;
   flex: 1 0 auto;
-  padding: 0 5rem;
+  margin: auto;
 }
 
 .wrapper {

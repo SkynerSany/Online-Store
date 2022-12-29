@@ -1,32 +1,59 @@
 import createCustomElement, { appendElement } from "../../core/templates/create.elements";
 import Page from "../../core/templates/page";
 import './cart.scss';
+import products from '../../data/products.json';
+import stringToElement from "../../utils/htmlToElement";
+import totalBox from "./cart.temlapte";
+
+interface Iproduct {
+  'id': number,
+  'title': string,
+  'description': string,
+  'price': number,
+  'discountPercentage': number,
+  'rating': number,
+  'stock': number,
+  'brand': string,
+  'category': string,
+  'thumbnail': string,
+  'images': string[],
+}
 
 class CartPage extends Page {
+  static count = 1;
   static TextObject = {
     title: 'Оформление Заказа',
   }
 
-  createCartMainBox() {
-    const wrapper = createCustomElement('div', 'cart', '');
-    const cartName = createCustomElement('h2', 'cart__name', 'Корзина');
-    appendElement(wrapper, cartName);
-    appendElement(this.container, wrapper);
-  }
+  createCartMainBox(num:number) {
+    const cartWrapper = createCustomElement('div', 'cart-wrap, flex-row', '');
+    const cart = createCustomElement('div', 'cart', '');
+    const cartName = createCustomElement('h1', 'cart__title', 'Ваш заказ');
+    appendElement(cart, cartName);
+    appendElement(cartWrapper, cart);
 
-  addProductToCart(productName: string) {
-    const arrElements = [];
-    const productBox = createCustomElement('div', 'cart__product', '');
-    const descriptionBox = createCustomElement('div', 'cart__description-box', '');
-    const productImage = createCustomElement('div', 'cart__product-img', '');
-    const productDescription = createCustomElement('div', 'cart__product-description', '');
-
+    for (let i = 0; i < num; i += 1) {
+      const productBox = createCustomElement('div', 'cart__product', '');
+      const descriptionBox = createCustomElement('div', 'cart__description-box, flex-row', '');
+      const productImage = createCustomElement('img', 'cart__product-img', '');
+      if (productImage instanceof HTMLImageElement) {
+        productImage.src = products.products[0].thumbnail;
+      }
+      const productDescription = createCustomElement('div', 'cart__product-description', 'bla-bla');
+      descriptionBox.append(productImage);
+      descriptionBox.append(productDescription);
+      productBox.append(descriptionBox);
+      appendElement(cart, productBox);
+      appendElement(cartWrapper, cart);
+    }
+    appendElement(cartWrapper, stringToElement(totalBox));
+    this.container.append(cartWrapper);
   }
 
   render() {
     const title = this.createHeaderTitle(CartPage.TextObject.title);
     this.container.append(title);
-    this.createCartMainBox();
+    this.createCartMainBox(CartPage.count);
     return this.container;
   }
 }
