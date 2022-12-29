@@ -1,49 +1,99 @@
-.multi-range__range {
-  position: absolute;
-
-  appearance: none;
-  background: linear-gradient($color-blue, $color-blue) no-repeat center;
-  background-size: 100% 0.6rem;
-
-  pointer-events: none;
-
-  &:nth-child(1) {
-    &::-webkit-slider-thumb::before {
-      background-color: red;
-    }
-  }
-
-  &:nth-child(2) {
-    background: none;
-
-    &::-webkit-slider-thumb::before {
-      background-color: grey;
-    }
-  }
-
-  &::-webkit-slider-thumb {
-    position: relative;
-
-    height: 2rem;
-    width: 2rem;
-    margin: 0.5rem 0;
-
-    appearance: none;
-    border-radius: 50%;
-    background-color: $color-blue;
-
-    cursor: pointer;
-    pointer-events: all;
-  }
+.multi-range__wrapper {
+  width: 100%;
+  position: relative;
+  height: 5px;
+  margin: 10px 0;
 }
 
-.multi-range {
-  position: relative;
+.multi-range__track-wrapper {
+  position: absolute;
+  left: 12px;
+  right: 10px;
+  height: 5px;
+}
 
-  width: 95%;
-  height: 3rem;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.multi-range__inverse-left {
+  position: absolute;
+  left: 0;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #CCC;
+  margin: 0 7px;
+}
+
+.multi-range__inverse-right {
+  position: absolute;
+  right: 0;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #CCC;
+  margin: 0 7px;
+}
+
+
+.multi-range__track {
+  position: absolute;
+  left: 0;
+  height: 5px;
+  border-radius: 14px;
+  background-color: $color-blue;
+}
+
+.multi-range__thumb {
+  position: absolute;
+  top: -8px;
+  z-index: 2;
+  height: 20px;
+  width: 20px;
+  text-align: left;
+  margin-left: -11px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  background-color: #FFF;
+  border-radius: 50%;
+  outline: none;
+}
+
+.multi-range__range {
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 3;
+  height: 14px;
+  top: -2px;
+  width: 100%;
+  opacity: 0;
+}
+
+.multi-range__range:focus::-webkit-slider-runnable-track {
+  background: transparent;
+  border: transparent;
+}
+
+.multi-range__range:focus {
+  outline: none;
+}
+
+.multi-range__range::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 28px;
+  height: 28px;
+  border-radius: 0px;
+  border: 0 none;
+  background: red;
+  -webkit-appearance: none;
+}
+
+.multi-range__range::-ms-fill-lower {
+  background: transparent;
+  border: 0 none;
+}
+
+.multi-range__range::-ms-fill-upper {
+  background: transparent;
+  border: 0 none;
+}
+
+.multi-range__range::-ms-tooltip {
+  display: none;
 }
