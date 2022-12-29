@@ -22,7 +22,7 @@ export const removeActiveClassesForMenu = (): void => {
   }
 }
 
-export const addListenerForMenu = ():void => {
+export const addListenerForHeader = ():void => {
   const menuBtn = document.querySelector('.header__main-nav');
   if (menuBtn instanceof HTMLElement) {
     menuBtn.addEventListener('click', () => {
@@ -33,6 +33,13 @@ export const addListenerForMenu = ():void => {
       elem.addEventListener('click', removeActiveClassesForMenu);
     });
   }
+}
+
+export const hideHeaderLineMenu = (idPage: string):void => {
+  const menuLine = document.querySelector('.header__bottom-row');
+  if (menuLine instanceof HTMLElement && idPage === 'cart-page') {
+    menuLine.classList.add('menu-line_not-active');
+  } else menuLine?.classList.remove('menu-line_not-active');
 }
 
 

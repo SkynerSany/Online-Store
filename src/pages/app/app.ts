@@ -3,7 +3,7 @@ import MainPage from "../main/main";
 import ProductPage from "../product/product";
 import CatalogPage from "../catalog/catalog";
 import Page from "../../core/templates/page";
-import headerElement, { removeActiveClassesForMenu, addListenerForMenu } from "../../core/components/header/header";
+import headerElement, { removeActiveClassesForMenu, addListenerForHeader, hideHeaderLineMenu } from "../../core/components/header/header";
 import footerElement from "../../core/components/footer/footer";
 import ErrorPage, { ErrorTypes } from "../error/error";
 
@@ -42,6 +42,7 @@ class App {
     pageHTML.id = App.defaultPageId;
     App.container.append(pageHTML);
     removeActiveClassesForMenu();
+    hideHeaderLineMenu(idPage);
     App.container.append(footerElement);
   }
 
@@ -63,7 +64,7 @@ class App {
 
     App.container.append(headerElement);
 
-    addListenerForMenu();
+    addListenerForHeader();
     App.renderNewPage(!currentLocation.length ? 'main-page' : currentLocation);
     App.container.append(footerElement);
     this.enableRouteChange();

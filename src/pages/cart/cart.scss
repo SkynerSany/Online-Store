@@ -1,3 +1,8 @@
+.cart-wrap {
+  max-width: 130rem;
+  gap: 2rem;
+}
+
 .cart {
   width: 100%;
   max-width: 86rem;
@@ -7,7 +12,12 @@
   border-radius: .8rem;
 }
 
+.cart__main-title {
+  font-size: 3.6rem;
+  margin-bottom: 5rem;
+}
 .cart__title {
+  color: $text-color-darknes;
   font-size: 2.8rem;
 }
 
@@ -23,11 +33,69 @@
   object-fit: cover;
 }
 
+
+
+
+// TOTAL-BOX
+
+// for hiding header's menu line
+.menu-line_not-active {
+  display: none;
+}
+
 .cart__total-box {
-  width: 20%;
   min-width: 42rem;
   height: 35.4rem;
   padding: 3rem;
   border-radius: .8rem;
   background-color: #EDF2F6;
+  .cart__title {
+    margin-bottom: 1.7rem;
+  }
 }
+
+.cart__number-products,
+.cart__delivery-box {
+  justify-content: space-between;
+  span {
+    font-size: 2rem;
+    color: $text-color-darknes;
+  }
+  & span:nth-child(1) {
+    color: $text-color-medium;
+  }
+}
+
+.cart__delivery-box {
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  border-bottom: .1rem solid #C8CACB;
+  span {
+    margin-top: 2rem;
+  }
+}
+
+.cart__summ-box {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__payment {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: $text-color-darknes;
+}
+
+.cart__summ {
+  font-size: 3.6rem;
+}
+
+.cart__order {
+  height: 4.8rem;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  color: $text-color-white;
+  background-color: $text-color-medium;
+  border-radius: .4rem;
+}
+

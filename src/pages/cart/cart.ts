@@ -25,8 +25,13 @@ class CartPage extends Page {
     title: 'Оформление Заказа',
   }
 
+  static hideLineMenu() {
+    const menuLine = document.querySelector('.header__bottom-row');
+    if (menuLine instanceof HTMLElement) menuLine.classList.add('menu-line_not-active');
+  }
+
   createCartMainBox(num:number) {
-    const cartWrapper = createCustomElement('div', 'cart-wrap, flex-row', '');
+    const cartWrapper = createCustomElement('div', 'cart-wrap flex-row', '');
     const cart = createCustomElement('div', 'cart', '');
     const cartName = createCustomElement('h1', 'cart__title', 'Ваш заказ');
     appendElement(cart, cartName);
@@ -52,6 +57,7 @@ class CartPage extends Page {
 
   render() {
     const title = this.createHeaderTitle(CartPage.TextObject.title);
+    title.className = 'cart__main-title';
     this.container.append(title);
     this.createCartMainBox(CartPage.count);
     return this.container;
