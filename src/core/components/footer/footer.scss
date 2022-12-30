@@ -17,10 +17,6 @@
 .footer__logo {
   width: 15.5rem;
   aspect-ratio: 4/1;
-
-  background-image: url(../../../assets/icons/logo.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
   
   @media screen and (max-width: 576px) {
     display: none;

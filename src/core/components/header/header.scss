@@ -12,17 +12,12 @@
   align-items: center;
   justify-content: space-between;
 
-  background-color: #fff;
+  background-color: $text-color-white;
 }
 
 .header__logo {
   width: 18.4rem;
   height: 6rem;
-
-  background-image: url(../../../assets/icons/logo.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .header__contact {
@@ -42,29 +37,6 @@
 
 .header__work-time {
   color: $text-color-medium;
-}
-
-.header__nav {
-  display: flex;
-  gap: 2rem;
-}
-
-.header__search {
-  width: 10rem;
-
-  color: $text-color-medium;
-
-  outline: none;
-  border: none;
-  border-bottom: .1rem solid $text-color-darknes;
-
-  &::placeholder {
-    color: $text-color-medium;
-  }
-
-  @media screen and (max-width: $small) {
-    display: none;
-  }
 }
 
 .header__cart {
@@ -179,7 +151,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 32rem;
+  width: 31rem;
   height: 4.8rem;
   padding-left: 2rem;
   background-color: $color-menu-burger;
