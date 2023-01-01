@@ -9,7 +9,9 @@ const INPUT_NAME = 'filter-checkbox__checkbox';
 const LABEL_NAME = 'filter-checkbox__label';
 const INPUT_ID = {
   PRICE_TO: '#price-to',
+  PRICE_FROM: '#price-from',
   STOCK_TO: '#stock-to',
+  STOCK_FROM: '#stock-FROM',
 }
 const FILTER_ID = {
   CATEGORY: '#category-container',
@@ -54,22 +56,30 @@ export default class Filters {
 
   private filterPrice(): void {
     let maxPrice = 0;
+    let minPrice = 99999;
     this.productsData.forEach((item) => {
       maxPrice = Math.max(maxPrice, item.price);
+      minPrice = Math.min(minPrice, item.price);
     });
 
     const numTo = document.querySelector(INPUT_ID.PRICE_TO);
+    const numFrom = document.querySelector(INPUT_ID.PRICE_FROM);
     if (numTo instanceof HTMLInputElement) numTo.value = `${ maxPrice }`;
+    if (numFrom instanceof HTMLInputElement) numFrom.value = `${ minPrice }`;
   }
 
   private filterStock(): void {
     let maxStock = 0;
+    let minStock = 99999;
     this.productsData.forEach((item) => {
       maxStock = Math.max(maxStock, item.stock);
+      minStock = Math.min(minStock, item.stock);
     });
 
     const numTo = document.querySelector(INPUT_ID.STOCK_TO);
+    const numFrom = document.querySelector(INPUT_ID.STOCK_FROM);
     if (numTo instanceof HTMLInputElement) numTo.value = `${ maxStock }`;
+    if (numFrom instanceof HTMLInputElement) numFrom.value = `${ minStock }`;
   }
 
   private filterCategory(): void {

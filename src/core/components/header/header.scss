@@ -18,6 +18,11 @@
 .header__logo {
   width: 18.4rem;
   height: 6rem;
+
+  background-image: url('../../../assets/icons/logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .header__contact {

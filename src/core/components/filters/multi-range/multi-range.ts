@@ -35,7 +35,7 @@ export default class MultiRange {
   }
 
   private changeLowerRange() {  
-    this.lowerRange.value = `${ Math.min(+this.lowerRange.value, +this.upperRange.value - 1) }`;
+    this.lowerRange.value = `${ Math.min(+this.lowerRange.value, +this.upperRange.value) }`;
 
     const value = Math.round((+this.lowerRange.value / +this.lowerRange.max) * 100);
 
@@ -51,7 +51,7 @@ export default class MultiRange {
   }
 
   private changeUpperRange() {    
-    this.upperRange.value = `${ Math.max(+this.upperRange.value, +this.lowerRange.value + 1) }`;
+    this.upperRange.value = `${ Math.max(+this.upperRange.value, +this.lowerRange.value) }`;
 
     const value = Math.round((+this.upperRange.value / +this.upperRange.max) * 100);
 
@@ -80,7 +80,9 @@ export default class MultiRange {
 
   private setValues() {
     this.upperRange.max = this.inputTo.value;
+    this.upperRange.min = this.inputFrom.value;
     this.lowerRange.max = this.inputTo.value;
+    this.lowerRange.min = this.inputFrom.value;
     this.upperRange.value = this.inputTo.value;
   }
 

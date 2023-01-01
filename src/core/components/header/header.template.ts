@@ -1,9 +1,7 @@
 const HEADER_TEMPLATE =  `<header class="header flex-col">
                           <div class="header__wrap flex-col">
                             <div class="wrapper header__top-row flex-row">
-                              <a href="#catalog" class="header__logo">
-                                <img src="./assets/logo.svg" alt="logo">
-                              </a>
+                              <a href="#catalog" class="header__logo" aria-label="logo"></a>
                               <div class="header__contact">
                                 <a href="tel:+375 29 999 99 99" class="header__number">+375 29 999 99 99</a>
                                 <a href="tel:+375 29 11 11 11" class="header__number">+375 29 11 11 11</a>

@@ -12,8 +12,8 @@ const PRICE_CURRENCY = 'р.';
 const RAITING_STAR = 'star';
 const RAITING_EMPTY_STAR = 'star star-empty';
 const BTN_ADD_TO_CART = {
-  DEFAULT: '.product__add',
-  ACTIVE: '.product__add-active',
+  DEFAULT: 'product__add',
+  ACTIVE: 'product__add-active',
 }
 
 export default class Product {
@@ -44,7 +44,7 @@ export default class Product {
   }
 
   private setEvents(newNode: HTMLTemplateElement): void {
-    const btnAddToCart = newNode.querySelector(BTN_ADD_TO_CART.DEFAULT);
+    const btnAddToCart = newNode.querySelector(`.${ BTN_ADD_TO_CART.DEFAULT }`);
 
     btnAddToCart?.addEventListener('click', () => btnAddToCart.classList.toggle(BTN_ADD_TO_CART.ACTIVE));
   }
