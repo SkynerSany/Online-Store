@@ -17,7 +17,7 @@
   left: 0;
   height: 5px;
   border-radius: 10px;
-  background-color: #CCC;
+  background-color: #cccccc;
   margin: 0 7px;
 }
 
@@ -26,7 +26,7 @@
   right: 0;
   height: 5px;
   border-radius: 10px;
-  background-color: #CCC;
+  background-color: #cccccc;
   margin: 0 7px;
 }
 
@@ -43,25 +43,32 @@
   position: absolute;
   top: -8px;
   z-index: 2;
+
   height: 20px;
   width: 20px;
-  text-align: left;
   margin-left: -11px;
-  cursor: pointer;
+
+  text-align: left;
+
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-  background-color: #FFF;
+  background-color: #ffffff;
   border-radius: 50%;
   outline: none;
 }
 
 .multi-range__range {
   position: absolute;
+  top: -2px;
+  z-index: 3;
+
+  height: 14px;
+  width: 100%;
+
   pointer-events: none;
   -webkit-appearance: none;
-  z-index: 3;
-  height: 14px;
-  top: -2px;
-  width: 100%;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
   opacity: 0;
 }
 
@@ -78,10 +85,28 @@
   pointer-events: all;
   width: 28px;
   height: 28px;
+
   border-radius: 0px;
   border: 0 none;
-  background: red;
+  background: #ff0000;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+}
+
+.multi-range__range::-moz-range-thumb {
+  pointer-events: all;
+  width: 28px;
+  height: 28px;
+
+  border-radius: 0px;
+  border: 0 none;
+  background: #ff0000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
 }
 
 .multi-range__range::-ms-fill-lower {

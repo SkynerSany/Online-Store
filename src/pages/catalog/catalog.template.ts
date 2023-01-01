@@ -17,7 +17,6 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="multi-range filter-range__multi-range">
                                     </div>
-                                    <button class="filters__confirm">Применить</button>
                                   </div>
                                   <div class="filter filter-range">
                                     <div class="filter__title-container">
@@ -33,38 +32,19 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="multi-range filter-range__multi-range">
                                     </div>
-                                    <button class="filters__confirm">Применить</button>
                                   </div>
                                   <div class="filter filter-checkbox">
                                     <div class="filter__title-container">
-                                      <p class="filter__name">Категория</p>
+                                      <p class="filter__name">Категории</p>
                                     </div>
-                                    <div class="filter-checkbox__container">
-                                      <input type="checkbox" id="category" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="category">asd</label>
-                                      <input type="checkbox" id="category1" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="category1">adfs</label>
-                                      <input type="checkbox" id="category2" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="category2">dgdfd</label>
-                                      <input type="checkbox" id="category3" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="category3">hjghdg</label>
-                                      <input type="checkbox" id="category4" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="category4">f;erjrf;sm</label>
+                                    <div class="filter-checkbox__container" id="category-container">
                                     </div>
                                   </div>
                                   <div class="filter filter-checkbox">
                                     <div class="filter__title-container">
-                                      <p class="filter__name">Изготовитель</p>
+                                      <p class="filter__name">Изготовители</p>
                                     </div>
-                                    <div class="filter-checkbox__container">
-                                      <input type="checkbox" id="brend" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="brend">400</label>
-                                      <input type="checkbox" id="brend1" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="brend1">500</label>
-                                      <input type="checkbox" id="brend2" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="brend2">600</label>
-                                      <input type="checkbox" id="brend3" class="filter-checkbox__checkbox">
-                                      <label class="filter-checkbox__label" for="brend3">700</label>
+                                    <div class="filter-checkbox__container" id="brand-container">
                                     </div>
                                   </div>
                                 </section>
