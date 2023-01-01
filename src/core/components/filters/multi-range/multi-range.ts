@@ -91,8 +91,8 @@ export default class MultiRange {
     this.getInputsNumber();
     this.setValues();
     
-    this.inputTo.addEventListener('input', (e) => {this.changeToInput(e)});
-    this.inputFrom.addEventListener('input', (e) => {this.changeFromInput(e)});
+    this.inputTo.addEventListener('change', (e) => {this.changeToInput(e)});
+    this.inputFrom.addEventListener('change', (e) => {this.changeFromInput(e)});
     this.lowerRange.addEventListener('input', () => {this.changeLowerRange()});
     this.upperRange.addEventListener('input', () => {this.changeUpperRange()});
 

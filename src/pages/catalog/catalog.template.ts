@@ -17,7 +17,6 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="multi-range filter-range__multi-range">
                                     </div>
-                                    <button class="filters__confirm">Применить</button>
                                   </div>
                                   <div class="filter filter-range">
                                     <div class="filter__title-container">
@@ -33,7 +32,6 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="multi-range filter-range__multi-range">
                                     </div>
-                                    <button class="filters__confirm">Применить</button>
                                   </div>
                                   <div class="filter filter-checkbox">
                                     <div class="filter__title-container">
