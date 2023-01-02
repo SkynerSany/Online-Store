@@ -1,0 +1,124 @@
+.multi-range__wrapper {
+  width: 100%;
+  position: relative;
+  height: 5px;
+  margin: 10px 0;
+}
+
+.multi-range__track-wrapper {
+  position: absolute;
+  left: 12px;
+  right: 10px;
+  height: 5px;
+}
+
+.multi-range__inverse-left {
+  position: absolute;
+  left: 0;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #cccccc;
+  margin: 0 7px;
+}
+
+.multi-range__inverse-right {
+  position: absolute;
+  right: 0;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #cccccc;
+  margin: 0 7px;
+}
+
+
+.multi-range__track {
+  position: absolute;
+  left: 0;
+  height: 5px;
+  border-radius: 14px;
+  background-color: $color-blue;
+}
+
+.multi-range__thumb {
+  position: absolute;
+  top: -8px;
+  z-index: 2;
+
+  height: 20px;
+  width: 20px;
+  margin-left: -11px;
+
+  text-align: left;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  background-color: #ffffff;
+  border-radius: 50%;
+  outline: none;
+}
+
+.multi-range__range {
+  position: absolute;
+  top: -2px;
+  z-index: 3;
+
+  height: 14px;
+  width: 100%;
+
+  pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  opacity: 0;
+}
+
+.multi-range__range:focus::-webkit-slider-runnable-track {
+  background: transparent;
+  border: transparent;
+}
+
+.multi-range__range:focus {
+  outline: none;
+}
+
+.multi-range__range::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 28px;
+  height: 28px;
+
+  border-radius: 0px;
+  border: 0 none;
+  background: #ff0000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+}
+
+.multi-range__range::-moz-range-thumb {
+  pointer-events: all;
+  width: 28px;
+  height: 28px;
+
+  border-radius: 0px;
+  border: 0 none;
+  background: #ff0000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+}
+
+.multi-range__range::-ms-fill-lower {
+  background: transparent;
+  border: 0 none;
+}
+
+.multi-range__range::-ms-fill-upper {
+  background: transparent;
+  border: 0 none;
+}
+
+.multi-range__range::-ms-tooltip {
+  display: none;
+}
