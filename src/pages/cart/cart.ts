@@ -31,22 +31,31 @@ class CartPage extends Page {
   }
 
   createCartMainBox(num:number) {
-    const cartWrapper = createCustomElement('div', 'cart-wrap flex-row', '');
-    const cart = createCustomElement('div', 'cart', '');
-    const cartName = createCustomElement('h1', 'cart__title', 'Ваш заказ');
+    let arrElements = [];
+    const cartWrapper = createCustomElement('div', 'cart-wrap flex-row', '', '', '');
+    const cart = createCustomElement('div', 'cart', '', '', '');
+    const cartName = createCustomElement('h1', 'cart__title', 'Ваш заказ', '', '');
     appendElement(cart, cartName);
     appendElement(cartWrapper, cart);
 
     for (let i = 0; i < num; i += 1) {
-      const productBox = createCustomElement('div', 'cart__product', '');
-      const descriptionBox = createCustomElement('div', 'cart__description-box, flex-row', '');
-      const productImage = createCustomElement('img', 'cart__product-img', '');
+      const productBox = createCustomElement('div', 'cart__product', '', '', '');
+      const descriptionBox = createCustomElement('div', 'cart__description-box flex-row', '', '', '');
+      const productImage = createCustomElement('img', 'cart__product-img', '', '', '');
+      const changeNumberProductsBox = createCustomElement('div', 'cart__change-number flex-row', '', '', '');
+      const minus = createCustomElement('button', 'cart__product-minus', '-', '', '');
+      const plus = createCustomElement('button', 'cart__product-plus', '+', '', '');
+      const productInput = createCustomElement('input', 'cart__product-input', '', 'number', '1');
+      arrElements.push(minus, productInput, plus);
+      changeNumberProductsBox.append(...arrElements);
+      arrElements = [];
       if (productImage instanceof HTMLImageElement) {
         productImage.src = products.products[0].thumbnail;
       }
-      const productDescription = createCustomElement('div', 'cart__product-description', 'bla-bla');
+      const productDescription = createCustomElement('p', 'cart__product-description', `${products.products[0].description}`, '', '');
       descriptionBox.append(productImage);
       descriptionBox.append(productDescription);
+      descriptionBox.append(changeNumberProductsBox); 
       productBox.append(descriptionBox);
       appendElement(cart, productBox);
       appendElement(cartWrapper, cart);
