@@ -3,7 +3,7 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                               <h2 class="catalog__title">Каталог</h2>
                               <div class="catalog__container">
                                 <section class="filters">
-                                  <div class="filter filter-range">
+                                  <form class="filter filter-range" id="price-form">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Цена, р</p>
                                     </div>
@@ -17,8 +17,8 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="multi-range filter-range__multi-range">
                                     </div>
-                                  </div>
-                                  <div class="filter filter-range">
+                                  </form>
+                                  <form class="filter filter-range" id="stock-form">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Колличество на складе</p>
                                     </div>
@@ -32,21 +32,21 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     </div>
                                     <div class="multi-range filter-range__multi-range">
                                     </div>
-                                  </div>
-                                  <div class="filter filter-checkbox">
+                                  </form>
+                                  <form class="filter filter-checkbox" id="category-form">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Категории</p>
                                     </div>
                                     <div class="filter-checkbox__container" id="category-container">
                                     </div>
-                                  </div>
-                                  <div class="filter filter-checkbox">
+                                  </form>
+                                  <form class="filter filter-checkbox" id="brand-form">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Изготовители</p>
                                     </div>
                                     <div class="filter-checkbox__container" id="brand-container">
                                     </div>
-                                  </div>
+                                  </form>
                                 </section>
                                 <section class="products">
                                   <div class="products__header">
