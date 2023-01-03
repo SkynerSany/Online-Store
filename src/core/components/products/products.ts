@@ -8,13 +8,11 @@ export default class Products {
   private products: Iproduct[];
   private container: HTMLElement;
   private productsOnPage: number;
-  private currentPage: number;
   private productsCount: number;
 
-  constructor(products: Iproduct[], container: HTMLElement, productsOnPage: number, currentPage: number) {
+  constructor(products: Iproduct[], container: HTMLElement, productsOnPage: number) {
     this.container = container;
     this.productsOnPage = productsOnPage;
-    this.currentPage = currentPage;
     this.products = products;
     this.productsCount = products.length;
   }
@@ -24,8 +22,11 @@ export default class Products {
     const catalogWrapper = this.container.querySelector(CATALOG_CONTAINER);
     if (!productsContainer || !catalogWrapper) return;
 
-    const fromProduct = this.currentPage * this.productsOnPage - this.productsOnPage;
-    const toProduct = this.currentPage * this.productsOnPage;
+    const queryParam = new URLSearchParams(window.location.search).get('page');
+    const currentPage = queryParam ? +queryParam : 1;    
+
+    const fromProduct = currentPage * this.productsOnPage - this.productsOnPage;
+    const toProduct = currentPage * this.productsOnPage;
 
     productsContainer.innerHTML = '';
     for (let i = fromProduct; i < toProduct; i += 1) {

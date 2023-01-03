@@ -2,6 +2,7 @@ import './pagination.scss';
 import { Iproduct } from '../../../app/interfaces';
 import Products from '../products/products';
 
+const QUERY_NAME = 'page';
 const PAGINATION_CONTAINER = '.pagination';
 const PAGINATION_BTN = '.pagination__btn';
 const PAGINATION_BTN_STYLE = {
@@ -49,40 +50,63 @@ export default class Pagination {
     paginationContainer.append(this.createBtn('', PAGINATION_BTN_TYPE.ARROW));
 
     this.setPaginationEvents();
-    this.checkCurrentPage();
-    new Products(this.products, this.container, this.productsOnPage, this.currentPage).setProducts();
+    this.setPage();
   }
 
   private setPrevPage(): void {
-    this.currentPage -= 1;
+    const currentPage = this.getCurrentPage() - 1;
+    this.addQuery(currentPage);
     this.setPage();
   }
 
   private setNextPage(): void {
-    this.currentPage += 1;
+    const currentPage = this.getCurrentPage() + 1;
+    this.addQuery(currentPage);
     this.setPage();
   }
 
-  private setPage(): void {
-    this.checkCurrentPage();
-    this.setCurrentPage();
-    new Products(this.products, this.container, this.productsOnPage, this.currentPage).setProducts();
+  private getQuery(): URLSearchParams {
+    const { search } = window.location;
+    return new URLSearchParams(search);
   }
 
-  private checkCurrentPage(): void {
+  private addQuery(currentPage: number): void {
+    const queryParams = this.getQuery();
+    queryParams.delete(QUERY_NAME);
+    queryParams.append(QUERY_NAME, `${ currentPage }`);
+
+    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;
+    const resultLink = `${ link }?${ queryParams.toString() }`;    
+    window.history.pushState({ path: resultLink }, '', resultLink);
+  }
+
+  private getCurrentPage(): number {
+    const queryParams = this.getQuery().get(QUERY_NAME);
+    return queryParams ? +queryParams : 1;
+  }
+
+  private setPage(): void {
+    const currentPage = this.getCurrentPage();
+
+    this.checkCurrentPage(currentPage);
+    this.setCurrentPage(currentPage);
+    new Products(this.products, this.container, this.productsOnPage).setProducts();
+  }
+
+  private checkCurrentPage(currentPage: number): void {
     const arrows = Array.from(this.container.querySelectorAll(`.${ PAGINATION_BTN_TYPE.ARROW }`));
     const [arrowPrev, arrowNext] = arrows as HTMLElement[];
 
-    arrowPrev.style.visibility = this.currentPage > 1 ? PAGINATION_BTN_STYLE.SHOW : PAGINATION_BTN_STYLE.HIDE;
-    arrowNext.style.visibility = this.currentPage < this.pageCount ? PAGINATION_BTN_STYLE.SHOW : PAGINATION_BTN_STYLE.HIDE;
+    arrowPrev.style.visibility = currentPage > 1 ? PAGINATION_BTN_STYLE.SHOW : PAGINATION_BTN_STYLE.HIDE;
+    arrowNext.style.visibility = currentPage < this.pageCount ? PAGINATION_BTN_STYLE.SHOW : PAGINATION_BTN_STYLE.HIDE;
   }
 
-  private setCurrentPage(): void {
+  private setCurrentPage(currentPage: number): void {
     const current = document.querySelector(PAGINATION_BTN);
     if (!(current instanceof HTMLElement) || !current.dataset) return;
     
-    current.dataset.id = `${ this.currentPage }`;
-    current.textContent = `${ this.currentPage }`;
+    current.dataset.id = `${ currentPage }`;
+    current.textContent = `${ currentPage }`;
   }
 
   private setPaginationEvents(): void {
