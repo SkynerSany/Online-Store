@@ -109,12 +109,14 @@ export default class Filters {
     })
   }
 
-  public setFilters() {
+  public setFilters(): FiltersQuery {
     this.filterPrice();
     this.filterStock();
     this.setMultiRange();
     this.filterCategory();
     this.filterBrand();
-    new FiltersQuery(this.productsData, this.container).init();
+    const filtersQuery = new FiltersQuery(this.productsData, this.container);
+    filtersQuery.init();
+    return filtersQuery;
   }
 }
