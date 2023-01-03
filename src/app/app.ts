@@ -47,10 +47,16 @@ class App {
     App.container.append(footerElement);
   }
 
+  private clearQuery(): void {
+    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;   
+    window.history.pushState({ path: link }, '', link);
+  }
+
   // This method gets changing hash and call method "renderNewPage"...
   private enableRouteChange() {
     window.addEventListener('hashchange', () => {
       const { hash } = window.location;
+      this.clearQuery();
       App.renderNewPage(hash.slice(1));
     });
   }

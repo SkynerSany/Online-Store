@@ -22,7 +22,6 @@ export default class Pagination {
   private productsCount: number;
 
   private productsOnPage = 12;
-  private currentPage = 1;
 
   constructor(products: Iproduct[], container: HTMLElement) {
     this.container = container;
@@ -45,6 +44,7 @@ export default class Pagination {
     const paginationContainer = this.container.querySelector(PAGINATION_CONTAINER);
     if (!paginationContainer) return;
     
+    paginationContainer.innerHTML = '';
     paginationContainer.append(this.createBtn('', PAGINATION_BTN_TYPE.ARROW));
     paginationContainer.append(this.createBtn('1', PAGINATION_BTN_TYPE.NUMBERS));
     paginationContainer.append(this.createBtn('', PAGINATION_BTN_TYPE.ARROW));
