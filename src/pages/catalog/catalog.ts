@@ -35,7 +35,7 @@ class CatalogPage extends Page {
       .then(() => {
         new Filters(this.products, this.container).setFilters();
         this.setDropdownList();
-        new Pagination(this.products, this.container).setPagination();
+        // new Pagination(this.products, this.container).setPagination();
       }, 
       (err) => console.error(err));
   }
