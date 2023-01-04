@@ -1,6 +1,7 @@
 import './filters.scss';
 import MultiRange from './multi-range/multi-range';
 import { Iproduct } from '../../../app/interfaces';
+import FiltersQuery from './filters-query/filters-query';
 
 const MULTI_RANGE_CONTAINER = '.multi-range';
 const MULTI_RAMGE_TYPES = ['price', 'stock'];
@@ -11,7 +12,7 @@ const INPUT_ID = {
   PRICE_TO: '#price-to',
   PRICE_FROM: '#price-from',
   STOCK_TO: '#stock-to',
-  STOCK_FROM: '#stock-FROM',
+  STOCK_FROM: '#stock-from',
 }
 const FILTER_ID = {
   CATEGORY: '#category-container',
@@ -48,7 +49,7 @@ export default class Filters {
   private createLabel(id: string): HTMLLabelElement {
     const label = document.createElement('label');
     label.htmlFor = id;
-    label.textContent = id;
+    label.textContent = id.split('-').join(' ');
     label.className = LABEL_NAME;
 
     return label;
@@ -91,7 +92,7 @@ export default class Filters {
     
     categorySet.forEach((category) => {
       categoryContainer.append(this.createInput(category));
-      categoryContainer.append(this.createLabel(category.split('-').join(' ')));
+      categoryContainer.append(this.createLabel(category));
     })
   }
 
@@ -114,5 +115,6 @@ export default class Filters {
     this.setMultiRange();
     this.filterCategory();
     this.filterBrand();
+    new FiltersQuery(this.productsData, this.container).init();
   }
 }
