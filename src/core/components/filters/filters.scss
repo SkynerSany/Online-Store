@@ -41,3 +41,159 @@
     }
   }
 }
+
+.filters {
+  width: 31rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media screen and (max-width: $large) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+    transform: translate(-100vw);
+
+    background: $text-color-white;
+    overflow: auto;
+
+    transition: all $duration-fast linear;
+
+    &-show {
+      display: flex;
+      transform: translate(0vw);
+    }
+  }
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.filters__header {
+  width: 100%;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 2rem;
+  text-transform: uppercase;
+
+  @media screen and (max-width: $large) {
+    display: flex;
+  }
+}
+
+.filters__close {
+  height: 30px;
+  width: 30px;
+  align-self: flex-end;
+
+  background-image: url(../../../assets/icons/x.svg);
+  background-position: center;
+  background-size: inherit;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
+}
+
+.filter__title-container {
+  height: 4rem;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $color-light-blue;
+  border-radius: 0.4rem;
+}
+
+.filter__name {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.products__sort-show {
+  width: 1.3rem;
+  height: 0.8rem;
+
+  background-image: url(../../../assets/icons/arrow.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.filter-range__numbers-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.6rem;
+  color: $text-color-medium;
+
+  input {
+    width: 11rem;
+    height: 4.5rem;
+    padding: 1rem 1rem 1rem 2rem;
+
+    color: $text-color-medium;
+
+    border: 0.1rem solid $text-color-medium;
+    border-radius: 0.4rem;
+
+    &::placeholder {
+      color: $text-color-medium;
+    }
+  }
+}
+
+.filter-range__numbers {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-range__range {
+  width: 100%;
+}
+
+.filters__confirm {
+  height: 4.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: $text-color-white;
+  
+  background: $color-blue;
+  border-radius: 0.4rem;
+
+  transition: background-color $duration-fast linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-dark-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.filter-checkbox__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  max-height: 20rem;
+  overflow: auto;
+}

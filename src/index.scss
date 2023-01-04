@@ -10,6 +10,12 @@ body {
   height: 100%;
 }
 
+body {
+  &.block {
+    overflow: hidden;
+  }
+}
+
 .flex-col {
   display: flex;
   flex-direction: column;

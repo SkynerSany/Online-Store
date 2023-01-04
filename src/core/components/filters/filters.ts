@@ -109,12 +109,30 @@ export default class Filters {
     })
   }
 
+  private filterToggle(): void {
+    const filtersContainer = document.querySelector('.filters');
+    if (filtersContainer instanceof HTMLElement) {
+      filtersContainer.classList.toggle('filters-show');
+      document.body.classList.toggle('block');
+    }
+  }
+
+  private setEvents(): void {
+    const btnShow = document.querySelector('.products__filters-show');
+    const btnClose = document.querySelector('.filters__close');
+
+    btnShow?.addEventListener('click', () => this.filterToggle());
+    btnClose?.addEventListener('click', () => this.filterToggle());
+  }
+
   public setFilters(): FiltersQuery {
     this.filterPrice();
     this.filterStock();
     this.setMultiRange();
     this.filterCategory();
     this.filterBrand();
+    this.setEvents();
+
     const filtersQuery = new FiltersQuery(this.productsData, this.container);
     filtersQuery.init();
     return filtersQuery;
