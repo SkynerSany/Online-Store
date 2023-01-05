@@ -6,6 +6,20 @@ const FORM_PRICE_NAME = '#price-form';
 const FORM_STOCK_NAME = '#stock-form';
 const FORM_BRAND_NAME = '#brand-form';
 const FORM_CATEGORY_NAME = '#category-form';
+const FILTER_TYPES = {
+  RANGE: 'range',
+  SEARCH: 'search',
+  CHECKBOX: 'checkbox',
+  STOCK: 'stock',
+  BRAND: 'brand',
+  CATEGORY: 'category',
+  PRICE: 'price',
+  SORT: 'sprt',
+}
+const SORT_TYPES = {
+  PRICE_LOW: 'sort-price-low',
+  PRICE_HIGH: 'sort-price-high',
+}
 const INPUT_ID = {
   SEARCH: '#search',
   PRICE_TO: '#price-to',
@@ -28,11 +42,12 @@ export default class FiltersQuery {
     if (!(e.currentTarget instanceof HTMLFormElement)) return;
     const allChecked = Array.from(e.currentTarget.elements)
       .filter((el) => {
-        if (el instanceof HTMLInputElement && (el.checked || el.type === 'range' || el.type === 'search')) return el; 
+        if (el instanceof HTMLInputElement && 
+          (el.checked || el.type === FILTER_TYPES.RANGE || el.type === FILTER_TYPES.SEARCH)) return el; 
         return false;
       })
       .map((el) => {
-        if (el instanceof HTMLInputElement) return el.type === 'checkbox' ? el.id : el.value;
+        if (el instanceof HTMLInputElement) return el.type === FILTER_TYPES.CHECKBOX ? el.id : el.value;
         return false;
       });
     
@@ -91,29 +106,37 @@ export default class FiltersQuery {
 
   public loadFromQuery(): void {
     const queryParams = this.getQuery();
-    const search = this.loadInputText(queryParams, 'search', INPUT_ID.SEARCH);
-    const price = this.loadDoubleRange(queryParams, 'price', INPUT_ID.PRICE_FROM, INPUT_ID.PRICE_TO);
-    const stock = this.loadDoubleRange(queryParams, 'stock', INPUT_ID.STOCK_FROM, INPUT_ID.STOCK_TO);
-    const brand = this.loadCheckbox(queryParams, 'brand');
-    const category = this.loadCheckbox(queryParams, 'category');
-    const sort = queryParams.get('sort') || 'sort-price-low';
+    const search = this.loadInputText(queryParams, FILTER_TYPES.SEARCH, INPUT_ID.SEARCH);
+    const price = this.loadDoubleRange(queryParams, FILTER_TYPES.PRICE, INPUT_ID.PRICE_FROM, INPUT_ID.PRICE_TO);
+    const stock = this.loadDoubleRange(queryParams, FILTER_TYPES.STOCK, INPUT_ID.STOCK_FROM, INPUT_ID.STOCK_TO);
+    const brand = this.loadCheckbox(queryParams, FILTER_TYPES.BRAND);
+    const category = this.loadCheckbox(queryParams, FILTER_TYPES.CATEGORY);
+    const sort = queryParams.get(FILTER_TYPES.SORT) || SORT_TYPES.PRICE_LOW;
 
     const newProducts = this.filterProducts(price, stock, brand, category, sort, search);
-    new Pagination(queryParams.toString().length ? newProducts : this.sortingProducts(this.productsData, sort), this.container).setPagination();
+    new Pagination(
+        queryParams.toString().length ? newProducts : this.sortingProducts(this.productsData, sort), 
+        this.container,
+        true
+      ).setPagination();
   }
 
   private filterProducts(
-      price: string[], 
-      stock: string[], 
-      brand: string[], 
-      category: string[], 
-      sort: string, 
-      search: string
-    ): Iproduct[] {
+    price: string[], 
+    stock: string[], 
+    brand: string[], 
+    category: string[], 
+    sort: string, 
+    search: string
+  ): Iproduct[] {
     let products = this.productsData.filter((product) => brand.length ? brand.includes(product.brand) : product);
     products = products.filter((product) => category.length ? category.includes(product.category) : product);
-    if (price.length) products = products.filter((product) => +product.price > +price[0] && +product.price < +price[1] ? product : false);
-    if (stock.length) products = products.filter((product) => +product.stock > +stock[0] && +product.stock < +stock[1] ? product : false);
+    if (price.length) products = products.filter(
+      (product) => +product.price > +price[0] && +product.price < +price[1] ? product : false
+    );
+    if (stock.length) products = products.filter(
+      (product) => +product.stock > +stock[0] && +product.stock < +stock[1] ? product : false
+    );
     products = products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()));
     products = this.sortingProducts(products, sort);
 
@@ -122,8 +145,8 @@ export default class FiltersQuery {
 
   private sortingProducts(products: Iproduct[], sort: string): Iproduct[] {
     return products.sort((a, b) => {
-      if (sort === 'sort-price-low') return a.price - b.price;
-      if (sort === 'sort-price-high') return b.price - a.price;
+      if (sort === SORT_TYPES.PRICE_LOW) return a.price - b.price;
+      if (sort === SORT_TYPES.PRICE_HIGH) return b.price - a.price;
       return b.discountPercentage - a.discountPercentage;
     });
   }
@@ -135,11 +158,11 @@ export default class FiltersQuery {
     const formBrand = document.querySelector(FORM_BRAND_NAME);
     const formCategory = document.querySelector(FORM_CATEGORY_NAME);
 
-    formSearch?.addEventListener('submit', (e) => this.checkFilters(e, 'search'));
-    formPrice?.addEventListener('change', (e) => this.checkFilters(e, 'price'));
-    formStock?.addEventListener('change', (e) => this.checkFilters(e, 'stock'));
-    formBrand?.addEventListener('change', (e) => this.checkFilters(e, 'brand'));
-    formCategory?.addEventListener('change', (e) => this.checkFilters(e, 'category'));
+    formSearch?.addEventListener('submit', (e) => this.checkFilters(e, FILTER_TYPES.SEARCH));
+    formPrice?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.PRICE));
+    formStock?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.STOCK));
+    formBrand?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.BRAND));
+    formCategory?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.CATEGORY));
   }
 
   private getQuery(): URLSearchParams {

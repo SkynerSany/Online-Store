@@ -2,6 +2,14 @@ import stringToElement from '../../../../utils/htmlToElement';
 import MULTI_RANGE_TEMLATE from './multi-range.template';
 import './multi-range.scss';
 
+const CLASSES = {
+  INPUT: '.multi-range__range',
+  LEFT_TRACK: '.multi-range__inverse-left',
+  RIGHT_TRACK: '.multi-range__inverse-right',
+  TRACK: '.multi-range__track',
+  THUMB: '.multi-range__thumb',
+}
+
 export default class MultiRange {
   private idName: string;
   private multiRange: HTMLTemplateElement;
@@ -16,7 +24,7 @@ export default class MultiRange {
   }
 
   private setInputsId(): void {
-    const [lowerRange, upperRange]: HTMLInputElement[] = Array.from(this.multiRange.querySelectorAll('.multi-range__range'));
+    const [lowerRange, upperRange]: HTMLInputElement[] = Array.from(this.multiRange.querySelectorAll(CLASSES.INPUT));
 
     lowerRange.id = `${ this.idName }-lower`;
     upperRange.id = `${ this.idName }-upper`;
@@ -39,9 +47,9 @@ export default class MultiRange {
 
     const value = Math.round((+this.lowerRange.value / +this.lowerRange.max) * 100);
 
-    const inverseLeft = this.multiRange.querySelector('.multi-range__inverse-left');
-    const track = this.multiRange.querySelector('.multi-range__track');
-    const leftThumb = this.multiRange.querySelectorAll('.multi-range__thumb')[0];
+    const inverseLeft = this.multiRange.querySelector(CLASSES.LEFT_TRACK);
+    const track = this.multiRange.querySelector(CLASSES.TRACK);
+    const leftThumb = this.multiRange.querySelectorAll(CLASSES.THUMB)[0];
 
     if (inverseLeft instanceof HTMLElement) inverseLeft.style.width = `${ value }%`;
     if (track instanceof HTMLElement) track.style.left = `${ value }%`;
@@ -55,9 +63,9 @@ export default class MultiRange {
 
     const value = Math.round((+this.upperRange.value / +this.upperRange.max) * 100);
 
-    const inverseRight = this.multiRange.querySelector('.multi-range__inverse-right');
-    const track = this.multiRange.querySelector('.multi-range__track');
-    const rightThumb = this.multiRange.querySelectorAll('.multi-range__thumb')[1];
+    const inverseRight = this.multiRange.querySelector(CLASSES.RIGHT_TRACK);
+    const track = this.multiRange.querySelector(CLASSES.TRACK);
+    const rightThumb = this.multiRange.querySelectorAll(CLASSES.THUMB)[1];
 
     if (inverseRight instanceof HTMLElement) inverseRight.style.width = `${ 100 - value }%`;
     if (track instanceof HTMLElement) track.style.right = `${ 100 - value }%`;
