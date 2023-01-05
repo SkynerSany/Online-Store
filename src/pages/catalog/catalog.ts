@@ -4,10 +4,7 @@ import CATALOG_TEMPLATE from './catalog.template';
 import DropdownList from '../../core/components/dropdown-list/dropdown-list';
 import { Iproduct, IproductList } from '../../app/interfaces';
 import Filters from '../../core/components/filters/filters';
-import Pagination from '../../core/components/pagination/pagination';
 import './catalog.scss';
-
-const SORT_CONTAINER = '.products__sort-container';
 
 class CatalogPage extends Page {
   products!: Iproduct[];
@@ -23,19 +20,11 @@ class CatalogPage extends Page {
       (err) => console.error(err));
   }
   
-  private setDropdownList(): void {
-    const sortContainer = document.querySelector(SORT_CONTAINER);
-
-    const dropdown = new DropdownList().set();
-    sortContainer?.append(dropdown);
-  }
-  
   private setComponents(): void {
     this.getProductsData()
       .then(() => {
-        new Filters(this.products, this.container).setFilters();
-        this.setDropdownList();
-        // new Pagination(this.products, this.container).setPagination();
+        const filters = new Filters(this.products, this.container).setFilters();
+        new DropdownList(filters).set();
       }, 
       (err) => console.error(err));
   }

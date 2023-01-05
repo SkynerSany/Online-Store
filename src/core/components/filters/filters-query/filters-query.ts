@@ -69,24 +69,34 @@ export default class FiltersQuery {
     return checkboxQueries;
   }
 
-  private loadFromQuery(): void {
+  public loadFromQuery(): void {
     const queryParams = this.getQuery();
     const price = this.loadDoubleRange(queryParams, 'price', INPUT_ID.PRICE_FROM, INPUT_ID.PRICE_TO);
     const stock = this.loadDoubleRange(queryParams, 'stock', INPUT_ID.STOCK_FROM, INPUT_ID.STOCK_TO);
     const brand = this.loadCheckbox(queryParams, 'brand');
     const category = this.loadCheckbox(queryParams, 'category');
+    const sort = queryParams.get('sort') || 'sort-price-low';
 
-    const newProducts = this.filterProducts(price, stock, brand, category);
-    new Pagination(queryParams.toString().length ? newProducts : this.productsData, this.container).setPagination();
+    const newProducts = this.filterProducts(price, stock, brand, category, sort);
+    new Pagination(queryParams.toString().length ? newProducts : this.sortingProducts(this.productsData, sort), this.container).setPagination();
   }
 
-  private filterProducts(price: string[], stock: string[], brand: string[], category: string[]): Iproduct[] {
+  private filterProducts(price: string[], stock: string[], brand: string[], category: string[], sort: string): Iproduct[] {
     let products = this.productsData.filter((product) => brand.length ? brand.includes(product.brand) : product);
     products = products.filter((product) => category.length ? category.includes(product.category) : product);
     if (price.length) products = products.filter((product) => +product.price > +price[0] && +product.price < +price[1] ? product : false);
     if (stock.length) products = products.filter((product) => +product.stock > +stock[0] && +product.stock < +stock[1] ? product : false);
+    products = this.sortingProducts(products, sort);
 
     return products;
+  }
+
+  private sortingProducts(products: Iproduct[], sort: string): Iproduct[] {
+    return products.sort((a, b) => {
+      if (sort === 'sort-price-low') return a.price - b.price;
+      if (sort === 'sort-price-high') return b.price - a.price;
+      return b.discountPercentage - a.discountPercentage;
+    });
   }
 
   private setFormEvents(): void {
