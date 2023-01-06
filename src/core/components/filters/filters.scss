@@ -44,6 +44,7 @@
 
 .filters {
   width: 31rem;
+  margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -256,4 +257,26 @@
   background-position: center;
   border-radius: 0 1rem 1rem 0;
   cursor: pointer;
+}
+
+.filters__btn-clear {
+  height: 40px;
+
+  font-size: 1.6rem;
+  color: $text-color-white;
+
+  background-color: $color-blue;
+  border-radius: 0.4rem;
+  outline: none;
+  cursor: pointer;
+
+  transition: background-color $duration-fast linear;
+
+  &:hover {
+    background-color: $color-dark-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 }

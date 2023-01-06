@@ -60,6 +60,7 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     <div class="filter-checkbox__container" id="brand-container">
                                     </div>
                                   </form>
+                                  <button class="filters__btn-clear">Очистить фильтры</button>
                                 </section>
                                 <section class="products">
                                   <div class="products__header">
