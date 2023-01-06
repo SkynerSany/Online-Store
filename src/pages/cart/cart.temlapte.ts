@@ -1,8 +1,8 @@
 const totalBox = `<div class="cart__total-box flex-col">
                     <h3 class="cart__title">Итого</h3>
                     <div class="cart__number-products flex-row">
-                      <span>товар(a) на сумму</span>
-                      <span>105 р.</span>
+                      <span class="cart__summ-product">товар(a) на сумму</span>
+                      <span class="cart__amount">0</span>
                     </div>
                     <div class="cart__delivery-box flex-row">
                       <span>Стоимость доставки</span>

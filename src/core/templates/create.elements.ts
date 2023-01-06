@@ -1,7 +1,8 @@
-const createCustomElement = (tagName:string, className:string, text:string, type:string, value: string): HTMLElement => {
+const createCustomElement = (tagName:string, className:string, text:string, src:string, type:string, value: string): HTMLElement => {
   const element = document.createElement(tagName);
   if (className) element.className = className;
   if (text) element.textContent = text;
+  if (element instanceof HTMLImageElement) element.src = src;
   if (element instanceof HTMLInputElement) {
     element.type = type;
     element.value = value;

@@ -1,33 +1,47 @@
 .cart-wrap {
+  display: grid;
+  grid-template-columns: .7fr .3fr;
   max-width: 130rem;
+  margin: auto;
   gap: 2rem;
 }
 
 .cart {
-  width: 100%;
-  max-width: 86rem;
-  max-height: 34.4rem;
+  max-height: fit-content;
+
   padding: 3rem;
+
   border: .1rem solid #C8CACB;
   border-radius: .8rem;
 }
 
 .cart__main-title {
-  font-size: 3.6rem;
   margin-bottom: 5rem;
+  font-size: 3.6rem;
 }
+
 .cart__title {
-  color: $text-color-darknes;
   font-size: 2.8rem;
+  color: $text-color-darknes;
 }
 
 .cart__product {
+  width: 100%;
   height: 10rem;
-} 
+}
 
 .cart__description-box {
+  justify-content: space-between;
   align-items: center;
+
   margin-top: 3rem;
+  padding-bottom: 3rem;
+
+  border-bottom: .1rem solid $text-color-medium;
+}
+
+.cart__descr-container {
+  align-items: center;
 }
 
 .cart__product-description {
@@ -49,11 +63,10 @@
 }
 
 .cart__product-plus {
+  padding-bottom: .6rem;
   font-size: 3rem;
   color: $text-color-darknes;
-  padding-bottom: .6rem;
 }
-
 
 // TOTAL-BOX
 
@@ -63,11 +76,13 @@
 }
 
 .cart__total-box {
-  min-width: 42rem;
-  height: 35.4rem;
+  height: fit-content;
+
   padding: 3rem;
+
   border-radius: .8rem;
   background-color: #EDF2F6;
+
   .cart__title {
     margin-bottom: 1.7rem;
   }
@@ -76,10 +91,12 @@
 .cart__number-products,
 .cart__delivery-box {
   justify-content: space-between;
+
   span {
     font-size: 2rem;
     color: $text-color-darknes;
   }
+
   & span:nth-child(1) {
     color: $text-color-medium;
   }
@@ -111,10 +128,40 @@
 
 .cart__order {
   height: 4.8rem;
+
   margin-top: 2rem;
+
   font-size: 1.6rem;
   color: $text-color-white;
+
   background-color: $text-color-medium;
   border-radius: .4rem;
+}
+
+.cart__change-number {
+  width: 10rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__product-input::-webkit-outer-spin-button,
+.cart__product-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.cart__product-input {
+  width: 4.8rem;
+  height: 4.8rem;
+
+  font-size: 1.6rem;
+  text-align: center;
+
+  border: .1rem solid $color-grey;
+  border-radius: 4px;
+}
+
+.cart__cur-price {
+  font-size: 2.4rem;
+  font-weight: 700;
 }
 

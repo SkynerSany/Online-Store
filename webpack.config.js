@@ -80,6 +80,7 @@ const baseConfig = {
     new CopyPlugin({
       patterns: [
         { from: 'src/data', to: './data' },
+        { from: 'src/assets', to: './assets' },
       ],
     }),
     new CleanWebpackPlugin(),
