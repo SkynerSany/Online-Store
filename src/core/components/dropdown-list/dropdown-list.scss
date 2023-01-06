@@ -38,7 +38,6 @@
   }
 }
  
- 
 .dropdown-list__list {
   position: absolute;
   top: 100%;
@@ -51,7 +50,6 @@
   border: 0.1rem solid $color-light-grey;
   border-radius: 0.4rem;
   border-top: none;
-  border-bottom: none;
   list-style: none;
   max-height: 0;
   overflow: hidden;
@@ -67,5 +65,10 @@
     &:hover {
       background-color: $color-light-blue;
     }
+  }
+
+  @media screen and (max-width: $small) {
+    width: inherit;
+    box-sizing: unset;
   }
 }

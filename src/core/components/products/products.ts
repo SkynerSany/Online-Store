@@ -1,5 +1,6 @@
 import Product from './product/product';
 import { Iproduct } from '../../../app/interfaces';
+import './products.scss';
 
 const CATALOG_CONTAINER = '.catalog__wrapper';
 const PRODUCTS_CONTAINER = '.products__container';

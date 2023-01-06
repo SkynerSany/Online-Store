@@ -3,6 +3,10 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                               <h2 class="catalog__title">Каталог</h2>
                               <div class="catalog__container">
                                 <section class="filters">
+                                  <div class="filters__header">
+                                    <h3>Фильтры</h3>
+                                    <button class="filters__close"></button>
+                                  </div>
                                   <form class="filter filter-range" id="price-form">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Цена, р</p>
@@ -52,17 +56,10 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                   <div class="products__header">
                                     <div class="products__filters-show">
                                       <div class="products__filters-image"></div>
-                                      Фильтры
-                                    </div>
-                                    <div class="products__filters-list">
-                                      <div class="current-filter">
-                                        <p class="current-filter__name">Подсветка: есть</p>
-                                        <button class="current-filter__remove"></button>
-                                      </div>
-                                      <button class="current-filter__clear">Очистить фильтры</button>
+                                      <span>Фильтры</span>
                                     </div>
                                     <div class="products__sort-container dropdown-list">
-                                      <p class="products__sort-title">Сначала дорогие</p>
+                                      <p class="products__sort-title">Сначала дешевые</p>
                                     </div>
                                   </div>
                                   <div class="products__container"></div>
