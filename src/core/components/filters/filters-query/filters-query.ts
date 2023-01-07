@@ -1,5 +1,7 @@
 import { Iproduct } from "../../../../app/interfaces";
 import Pagination from "../../pagination/pagination";
+import { loadCheckbox, loadDoubleRange, loadInputText } from "./load-quary";
+import { removeCheckbox, removeDoubleRange, removeInputText } from "./remove-filters";
 
 const FORM_SEARCH_NAME = '#search-form'
 const FORM_PRICE_NAME = '#price-form';
@@ -7,7 +9,6 @@ const FORM_STOCK_NAME = '#stock-form';
 const FORM_BRAND_NAME = '#brand-form';
 const FORM_CATEGORY_NAME = '#category-form';
 const BTN_REMOVE = '.filters__btn-clear';
-const CHECKBOX = '.filter-checkbox__checkbox';
 const FILTER_TYPES = {
   RANGE: 'range',
   SEARCH: 'search',
@@ -56,63 +57,13 @@ export default class FiltersQuery {
     this.addQuery(type, allChecked.join(','));
   }
 
-  private setDoubleRangeValue(from: HTMLInputElement, to: HTMLInputElement, query: string[]) {
-    const [inputFrom, inputTo] = [from, to];
-
-    inputFrom.value = `${ query[0] || inputFrom.value }`; 
-    inputTo.value = `${ query[1] || inputTo.value }`;
-
-    const event = new Event("change");
-    inputFrom.dispatchEvent(event);
-    inputTo.dispatchEvent(event);
-  }
-
-  private setInputTextValue(input: HTMLInputElement, query: string) {
-    const search = input;
-    search.value = `${ query || search.value }`; 
-
-    const event = new Event("submit");
-    search.dispatchEvent(event);
-  }
-
-  private loadDoubleRange(queryParams: URLSearchParams, idType: string, idFrom: string, idTo: string): string[] {
-    const from = document.querySelector(idFrom);
-    const to = document.querySelector(idTo);
-    const id = queryParams.get(idType)?.split(',') || [];
-    if (!(from instanceof HTMLInputElement) || !(to instanceof HTMLInputElement)) return [];
-
-    this.setDoubleRangeValue(from, to, id);
-    return id;
-  }
-
-  private loadInputText(queryParams: URLSearchParams, idType: string, idSearch: string): string {
-    const search = document.querySelector(idSearch);
-    const id = queryParams.get(idType) || '';
-    if (!(search instanceof HTMLInputElement)) return '';
-
-    this.setInputTextValue(search, id);
-    return id;
-  }
-
-  private loadCheckbox(queryParams: URLSearchParams, id: string): string[] {
-    const checkboxQueries = queryParams.get(id)?.split(',') || [];
-    if (checkboxQueries[0] === '' || !checkboxQueries.length) return [];
-
-    checkboxQueries.forEach((checkboxQuery) => {
-      const checkbox = document.querySelector(`#${ checkboxQuery }`);
-      if (checkbox instanceof HTMLInputElement) checkbox.checked = true;
-    });
-
-    return checkboxQueries;
-  }
-
   public loadFromQuery(): void {
     const queryParams = this.getQuery();
-    const search = this.loadInputText(queryParams, FILTER_TYPES.SEARCH, INPUT_ID.SEARCH);
-    const price = this.loadDoubleRange(queryParams, FILTER_TYPES.PRICE, INPUT_ID.PRICE_FROM, INPUT_ID.PRICE_TO);
-    const stock = this.loadDoubleRange(queryParams, FILTER_TYPES.STOCK, INPUT_ID.STOCK_FROM, INPUT_ID.STOCK_TO);
-    const brand = this.loadCheckbox(queryParams, FILTER_TYPES.BRAND);
-    const category = this.loadCheckbox(queryParams, FILTER_TYPES.CATEGORY);
+    const search = loadInputText(queryParams, FILTER_TYPES.SEARCH, INPUT_ID.SEARCH);
+    const price = loadDoubleRange(queryParams, FILTER_TYPES.PRICE, INPUT_ID.PRICE_FROM, INPUT_ID.PRICE_TO);
+    const stock = loadDoubleRange(queryParams, FILTER_TYPES.STOCK, INPUT_ID.STOCK_FROM, INPUT_ID.STOCK_TO);
+    const brand = loadCheckbox(queryParams, FILTER_TYPES.BRAND);
+    const category = loadCheckbox(queryParams, FILTER_TYPES.CATEGORY);
     const sort = queryParams.get(FILTER_TYPES.SORT) || SORT_TYPES.PRICE_LOW;
 
     const newProducts = this.filterProducts(price, stock, brand, category, sort, search);
@@ -153,16 +104,32 @@ export default class FiltersQuery {
     });
   }
 
-  private removeFilters(): void {
+  private removeFilters(
+      price: HTMLFormElement, 
+      stock: HTMLFormElement, 
+      brand: HTMLFormElement, 
+      category: HTMLFormElement,
+      formSearch: HTMLFormElement): void {
+    this.setChanges(this.removeQuary());
+    
+    removeDoubleRange(price);
+    removeDoubleRange(stock);
+    removeCheckbox(brand);
+    removeCheckbox(category);
+    removeInputText(formSearch);
+    
+  }
+
+  private removeQuary(): URLSearchParams {
     const queryParams = this.getQuery();
+
     queryParams.delete(FILTER_TYPES.BRAND);
     queryParams.delete(FILTER_TYPES.CATEGORY);
     queryParams.delete(FILTER_TYPES.PRICE);
     queryParams.delete(FILTER_TYPES.SEARCH);
     queryParams.delete(FILTER_TYPES.STOCK);
 
-    this.setChanges(queryParams);
-    window.location.reload();
+    return queryParams;
   }
 
   private setFormEvents(): void {
@@ -172,13 +139,20 @@ export default class FiltersQuery {
     const formBrand = document.querySelector(FORM_BRAND_NAME);
     const formCategory = document.querySelector(FORM_CATEGORY_NAME);
     const btnRemove = document.querySelector(BTN_REMOVE);
+
+    if (!(formPrice instanceof HTMLFormElement)
+       || !(formStock instanceof HTMLFormElement)
+       || !(formBrand instanceof HTMLFormElement)
+       || !(formCategory instanceof HTMLFormElement)
+       || !(formSearch instanceof HTMLFormElement)
+    ) return;
     
     formSearch?.addEventListener('submit', (e) => this.checkFilters(e, FILTER_TYPES.SEARCH));
-    formPrice?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.PRICE));
-    formStock?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.STOCK));
-    formBrand?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.BRAND));
-    formCategory?.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.CATEGORY));
-    btnRemove?.addEventListener("click", () => this.removeFilters());
+    formPrice.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.PRICE));
+    formStock.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.STOCK));
+    formBrand.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.BRAND));
+    formCategory.addEventListener('change', (e) => this.checkFilters(e, FILTER_TYPES.CATEGORY));
+    btnRemove?.addEventListener("click", () => this.removeFilters(formPrice, formStock, formBrand, formCategory, formSearch));
   }
 
   private getQuery(): URLSearchParams {
