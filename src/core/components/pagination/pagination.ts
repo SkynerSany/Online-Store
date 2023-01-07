@@ -52,7 +52,6 @@ export default class Pagination {
     paginationContainer.append(this.createBtn('', PAGINATION_BTN_TYPE.ARROW));
 
     this.setPaginationEvents();
-    if (this.getCurrentPage() !== 1) this.addQuery(1);
     this.setPage();
   }
 
@@ -79,7 +78,9 @@ export default class Pagination {
     queryParams.append(QUERY_NAME, `${ currentPage }`);
 
     const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;
-    const resultLink = `${ link }?${ queryParams.toString() }`;    
+    const quaryStr = queryParams.toString();
+    const quaryOperator = quaryStr.length ? '?' : '';
+    const resultLink = `${ link }${ quaryOperator }${ quaryStr }${ window.location.hash }`;    
     window.history.pushState({ path: resultLink }, '', resultLink);
   }
 

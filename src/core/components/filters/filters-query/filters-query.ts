@@ -18,6 +18,7 @@ const FILTER_TYPES = {
   CATEGORY: 'category',
   PRICE: 'price',
   SORT: 'sort',
+  PAGE: 'page',
 }
 const SORT_TYPES = {
   PRICE_LOW: 'sort-price-low',
@@ -46,7 +47,7 @@ export default class FiltersQuery {
     const allChecked = Array.from(e.currentTarget.elements)
       .filter((el) => {
         if (el instanceof HTMLInputElement && 
-          (el.checked || el.type === FILTER_TYPES.RANGE || el.type === FILTER_TYPES.SEARCH)) return el; 
+          (el.checked || el.type === FILTER_TYPES.RANGE || (el.type === FILTER_TYPES.SEARCH && el.value !== ''))) return el; 
         return false;
       })
       .map((el) => {
@@ -111,13 +112,12 @@ export default class FiltersQuery {
       category: HTMLFormElement,
       formSearch: HTMLFormElement): void {
     this.setChanges(this.removeQuary());
-    
+
     removeDoubleRange(price);
     removeDoubleRange(stock);
     removeCheckbox(brand);
     removeCheckbox(category);
     removeInputText(formSearch);
-    
   }
 
   private removeQuary(): URLSearchParams {
@@ -163,15 +163,20 @@ export default class FiltersQuery {
   private addQuery(queryName: string, value: string): void {
     const queryParams = this.getQuery();
     queryParams.delete(queryName);
-    queryParams.append(queryName, `${ value }`);
+    queryParams.delete(FILTER_TYPES.PAGE);
+    if (value !== '') queryParams.append(queryName, `${ value }`);
 
     this.setChanges(queryParams);
   }
 
   private setChanges(queryParams: URLSearchParams): void {
     const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;
-    const resultLink = `${ link }?${ queryParams.toString() }`;    
-    window.history.pushState({ path: resultLink }, '', resultLink);
+    const quaryStr = queryParams.toString();
+    const quaryOperator = quaryStr.length ? '?' : '';
+    const resultLink = `${ link }${ quaryOperator }${ quaryStr }${ window.location.hash }`;
+    if (window.location.href !== resultLink) {
+      window.history.pushState({ path: resultLink }, '', resultLink);
+    }
     this.loadFromQuery();
   }
 

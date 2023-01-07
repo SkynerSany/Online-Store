@@ -47,7 +47,7 @@ class App {
   }
 
   private clearQuery(): void {
-    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;   
+    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }${ window.location.hash }`;   
     window.history.pushState({ path: link }, '', link);
   }
 
