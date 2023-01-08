@@ -132,14 +132,6 @@ export default class FiltersQuery {
     return queryParams;
   }
 
-  private sortingProducts(products: Iproduct[], sort: string): Iproduct[] {
-    return products.sort((a, b) => {
-      if (sort === 'sort-price-low') return a.price - b.price;
-      if (sort === 'sort-price-high') return b.price - a.price;
-      return b.discountPercentage - a.discountPercentage;
-    });
-  }
-
   private setFormEvents(): void {
     const formSearch = document.querySelector(FORM_SEARCH_NAME);
     const formPrice = document.querySelector(FORM_PRICE_NAME);
@@ -178,10 +170,9 @@ export default class FiltersQuery {
   }
 
   private setChanges(queryParams: URLSearchParams): void {
-    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;
     const quaryStr = queryParams.toString();
     const quaryOperator = quaryStr.length ? '?' : '';
-    const resultLink = `${ link }${ quaryOperator }${ quaryStr }${ window.location.hash }`;
+    const resultLink = `${ window.location.origin }${ quaryOperator }${ quaryStr }${ window.location.hash }`;
     if (window.location.href !== resultLink) {
       window.history.pushState({ path: resultLink }, '', resultLink);
     }

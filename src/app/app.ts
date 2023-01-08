@@ -1,5 +1,4 @@
 import CartPage from "../pages/cart/cart";
-import MainPage from "../pages/main/main";
 import ProductPage from "../pages/product/product";
 import CatalogPage from "../pages/catalog/catalog";
 import Page from "../core/templates/page";
@@ -7,7 +6,7 @@ import headerElement, { addListenerForMenu } from "../core/components/header/hea
 import footerElement from "../core/components/footer/footer";
 import ErrorPage, { ErrorTypes } from "../pages/error/error";
 
-type PageType = MainPage | CartPage | ProductPage | CatalogPage;
+type PageType = CartPage | ProductPage | CatalogPage;
 const PAGES = {
   CATALOG: 'catalog',
   CART: 'cart',
@@ -29,13 +28,13 @@ class App {
 
     let page: Page | null = null;
 
-    const obj: {[prop: string]: () => PageType} = {
+    const pages: {[prop: string]: () => PageType} = {
       'cart': () => new CartPage(PAGES.CART),
       'product': () => new ProductPage(PAGES.PRODUCT),
       'catalog': () => new CatalogPage(PAGES.CATALOG),
     }
 
-    page = obj[idPage] ? obj[idPage]() : new ErrorPage(idPage, ErrorTypes.Error_404);
+    page = pages[idPage] ? pages[idPage]() : new ErrorPage(idPage, ErrorTypes.Error_404);
 
     if (!page) return;
 
@@ -56,13 +55,14 @@ class App {
     window.addEventListener('hashchange', () => {
       const { hash } = window.location;
       this.clearQuery();
-      App.renderNewPage(hash.slice(1));
+      App.renderNewPage(hash.slice(1, hash.indexOf('-') > 0 ? hash.indexOf('-') : hash.length + 1));
     });
   }
   // ===============================
 
   run() {
-    const currentLocation = document.location.hash.slice(1);
+    const { hash } = window.location;
+    const currentLocation = hash.slice(1, hash.indexOf('-') > 0 ? hash.indexOf('-') : hash.length + 1);
 
     App.container.append(headerElement);
 
