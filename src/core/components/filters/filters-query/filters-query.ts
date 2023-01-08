@@ -3,6 +3,7 @@ import Pagination from "../../pagination/pagination";
 import { loadCheckbox, loadDoubleRange, loadInputText } from "./load-quary";
 import { removeCheckbox, removeDoubleRange, removeInputText } from "./remove-filters";
 
+const PRODUCT_COUNT = '.products__count';
 const FORM_SEARCH_NAME = '#search-form'
 const FORM_PRICE_NAME = '#price-form';
 const FORM_STOCK_NAME = '#stock-form';
@@ -66,8 +67,11 @@ export default class FiltersQuery {
     const brand = loadCheckbox(queryParams, FILTER_TYPES.BRAND);
     const category = loadCheckbox(queryParams, FILTER_TYPES.CATEGORY);
     const sort = queryParams.get(FILTER_TYPES.SORT) || SORT_TYPES.PRICE_LOW;
+    const productCount = document.querySelector(PRODUCT_COUNT);
 
     const newProducts = this.filterProducts(price, stock, brand, category, sort, search);
+    
+    if (productCount) productCount.textContent = `${ newProducts.length }`;
     new Pagination(
         queryParams.toString().length ? newProducts : this.sortingProducts(this.productsData, sort), 
         this.container,

@@ -6,14 +6,21 @@
 .products__header {
   margin-bottom: 2rem;
   display: flex;
-  justify-content: flex-end;
-
-  @media screen and (max-width: $large) {
-    justify-content: space-between;
-  }
+  justify-content: space-between;
 
   @media screen and (max-width: $small) {
     gap: 2rem;
+  }
+}
+
+.products__count-container {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  @media screen and (max-width: $large) {
+    display: none;
   }
 }
 

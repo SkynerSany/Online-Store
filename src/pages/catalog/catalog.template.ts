@@ -64,6 +64,10 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                 </section>
                                 <section class="products">
                                   <div class="products__header">
+                                    <p class="products__count-container">
+                                      <span>Найдено: </span>
+                                      <span class="products__count"></span>
+                                    </p>
                                     <div class="products__filters-show">
                                       <div class="products__filters-image"></div>
                                       <span>Фильтры</span>
