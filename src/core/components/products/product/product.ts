@@ -17,7 +17,8 @@ const PRODUCT_NAME = '.product__name';
 const PRODUCT_PRICE = '.product__price-after';
 const PRODUCT_DISCOUNT = '.product__discount-percent';
 const PRODUCT_PRICE_BEFORE = '.product__price-before';
-const PRODUCT_STARS_CONTAINER = '.product__stars'
+const PRODUCT_STARS_CONTAINER = '.product__stars';
+const PRODUCT_STOCK = '.product__stock-text';
 const PRICE_CURRENCY = 'р.';
 const RAITING_STAR = 'star';
 const RAITING_EMPTY_STAR = 'star star-empty';
@@ -115,6 +116,7 @@ export default class Product {
     const category = newNode.querySelector(PRODUCT_CATEGORY);
     const brand = newNode.querySelector(PRODUCT_BRAND);
     const discount = newNode.querySelector(PRODUCT_DISCOUNT);
+    const stock = newNode.querySelector(PRODUCT_STOCK);
     const priceBefore = newNode.querySelector(PRODUCT_PRICE_BEFORE);
     const sliderImages = newNode.querySelector(PRODUCT_THUMBS);
     const btnAddToCart = newNode.querySelector(`.${ BTN_ADD_TO_CART.DEFAULT }`);
@@ -126,11 +128,12 @@ export default class Product {
     }
     if (name) name.textContent = this.productData.title;
     if (description) description.textContent = this.productData.description;
-    if (category) category.textContent = this.productData.category;
+    if (category) category.textContent = this.productData.category.replace('-',' ');
     if (brand) brand.textContent = this.productData.brand;
     if (starsContainer instanceof HTMLDivElement) this.setStars(starsContainer);
     if (price) price.textContent = `${ this.productData.price } ${ PRICE_CURRENCY }`;
     if (discount) discount.textContent = `-${ this.productData.discountPercentage }%`;
+    if (stock) stock.textContent = `${ this.productData.stock }`;
     if (priceBefore) {
       const calcPrice = this.productData.price * 100 / (100 - this.productData.discountPercentage);
       priceBefore.textContent = `${ calcPrice.toFixed(2) } ${ PRICE_CURRENCY }`;

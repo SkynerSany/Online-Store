@@ -1,4 +1,13 @@
 const PRODUCT_PAGE_TEMPLATE = `<article class="product-page">
+<div class="wrapper product-page__nav">
+  <a href="#catalog" class="product-page__nav-item">Каталог</a>
+  <span class="product-page__nav-arrow"></span>
+  <span class="product-page__nav-item"></span>
+  <span class="product-page__nav-arrow"></span>
+  <span class="product-page__nav-item"></span>
+  <span class="product-page__nav-arrow"></span>
+  <span class="product-page__nav-item"></span>
+</div>
 <div class="wrapper product-page__wrapper">
   <section class="product-page__slider">
     <div class="product-page__slider-image">
@@ -19,6 +28,10 @@ const PRODUCT_PAGE_TEMPLATE = `<article class="product-page">
         <p>
           <span>Категория:</span>
           <span class="product__category-text"></span>
+        </p>
+        <p>
+          <span>Колличество на складе:</span>
+          <span class="product__stock-text"></span>
         </p>
       </div>
       <div class="product__stars product-page__stars"></div>
