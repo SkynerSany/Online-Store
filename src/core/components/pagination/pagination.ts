@@ -20,14 +20,16 @@ export default class Pagination {
   private pageCount: number;
   private products: Iproduct[];
   private productsCount: number;
+  private filtersChanged: boolean;
 
   private productsOnPage = 12;
 
-  constructor(products: Iproduct[], container: HTMLElement) {
+  constructor(products: Iproduct[], container: HTMLElement, filtersChanged = false) {
     this.container = container;
     this.products = products;
     this.productsCount = products.length;
     this.pageCount = Math.ceil(this.productsCount / this.productsOnPage);
+    this.filtersChanged = filtersChanged;
   }
 
   private createBtn(num: string, type: string): HTMLDivElement {
@@ -76,7 +78,9 @@ export default class Pagination {
     queryParams.append(QUERY_NAME, `${ currentPage }`);
 
     const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;
-    const resultLink = `${ link }?${ queryParams.toString() }`;    
+    const quaryStr = queryParams.toString();
+    const quaryOperator = quaryStr.length ? '?' : '';
+    const resultLink = `${ link }${ quaryOperator }${ quaryStr }${ window.location.hash }`;    
     window.history.pushState({ path: resultLink }, '', resultLink);
   }
 
@@ -90,7 +94,8 @@ export default class Pagination {
 
     this.checkCurrentPage(currentPage);
     this.setCurrentPage(currentPage);
-    new Products(this.products, this.container, this.productsOnPage).setProducts();
+    new Products(this.products, this.container, this.productsOnPage).setProducts(this.filtersChanged);
+    this.filtersChanged = false;
   }
 
   private checkCurrentPage(currentPage: number): void {

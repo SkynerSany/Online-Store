@@ -3,7 +3,7 @@ import MainPage from "../pages/main/main";
 import ProductPage from "../pages/product/product";
 import CatalogPage from "../pages/catalog/catalog";
 import Page from "../core/templates/page";
-import headerElement, { removeActiveClassesForMenu, addListenerForMenu } from "../core/components/header/header";
+import headerElement, { addListenerForMenu } from "../core/components/header/header";
 import footerElement from "../core/components/footer/footer";
 import ErrorPage, { ErrorTypes } from "../pages/error/error";
 
@@ -43,12 +43,11 @@ class App {
 
     pageHTML.id = App.defaultPageId;
     App.container.append(pageHTML);
-    removeActiveClassesForMenu();
     App.container.append(footerElement);
   }
 
   private clearQuery(): void {
-    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;   
+    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }${ window.location.hash }`;   
     window.history.pushState({ path: link }, '', link);
   }
 

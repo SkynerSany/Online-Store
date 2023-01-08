@@ -7,6 +7,15 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     <h3>Фильтры</h3>
                                     <button class="filters__close"></button>
                                   </div>
+                                  <form class="filter filter-text" id="search-form">
+                                    <div class="filter__title-container">
+                                      <p class="filter__name">Поиск</p>
+                                    </div>
+                                    <div class="filter-text__container">
+                                      <input id="search" class="filter-text__input" type="search" placeholder="Поиск..." autofocus/>
+                                      <button class="filter-text__btn" aria-label="search"></button>  
+                                    </div>
+                                  </form>
                                   <form class="filter filter-range" id="price-form">
                                     <div class="filter__title-container">
                                       <p class="filter__name">Цена, р</p>
@@ -51,6 +60,7 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                     <div class="filter-checkbox__container" id="brand-container">
                                     </div>
                                   </form>
+                                  <button class="filters__btn-clear">Очистить фильтры</button>
                                 </section>
                                 <section class="products">
                                   <div class="products__header">
