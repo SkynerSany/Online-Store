@@ -21,7 +21,7 @@ export interface Iproduct {
 }
 
 class CartPage extends Page {
-  static count = 2;
+  static count = 1;
   static TextObject = {
     title: 'Оформление Заказа',
   }
@@ -45,9 +45,9 @@ class CartPage extends Page {
       summProducts.innerText = `${num === 1 ? `${num} товар на сумму` : `${num > 1 && num < 5 ? `${num} товара на сумму` : `${num} товаров на сумму`}`}`;
     }
 
-    const cartWrapper = createCustomElement('div', 'cart-wrap flex-row', '', '', '', '');
+    const cartWrapper = createCustomElement('div', 'cart-wrap', '', '', '', '');
     const cart = createCustomElement('div', 'cart', '', '', '', '');
-    const cartName = createCustomElement('h1', 'cart__title', `${num ? 'Ваш заказ' : 'Ваша корзина пуста'}`, '', '', '');
+    const cartName = createCustomElement('h1', 'cart__title', `${CartController.countProducts ? 'Ваш заказ' : 'Ваша корзина пуста'}`, '', '', '');
     appendElement(cart, cartName);
     appendElement(cartWrapper, cart);
 
@@ -67,7 +67,7 @@ class CartPage extends Page {
       arrElements.push(productImage, productDescription);
       descrContainer.append(...arrElements);
       arrElements = [];
-      
+
       // add listener for button plus and minus
       plus.addEventListener('click', ():void => {
         if (productInput && amount instanceof HTMLElement && cartSumm instanceof HTMLElement && summProducts instanceof HTMLElement) {
@@ -81,12 +81,25 @@ class CartPage extends Page {
       });
       // ____________________________________
 
+      productInput.addEventListener('change', ():void => {
+        // if (productInput instanceof HTMLInputElement) {
+        //   CartController.countProducts += +productInput.value - 1;
+        //   if (cartSumm instanceof HTMLElement && summProducts instanceof HTMLElement) {
+        //     summProducts.innerText = `${CartController.countProducts === 1 ? `${CartController.countProducts} товар на сумму` : `${CartController.countProducts > 1 && CartController.countProducts < 5 ? `${CartController.countProducts} товара на сумму` : `${CartController.countProducts} товаров на сумму`}`}`;
+        //   }
+        // }
+        if (productInput instanceof HTMLElement && amount instanceof HTMLElement && cartSumm instanceof HTMLElement && summProducts instanceof HTMLElement) {
+          cartController.addListenerForInput(productInput, amount, cartSumm, summProducts, i);
+        }
+      })
+
       // add listener for button-remove
       buttonRemove.addEventListener('click', ():void => {
         if (productInput && amount instanceof HTMLElement && cartSumm instanceof HTMLElement && summProducts instanceof HTMLElement && productBox instanceof HTMLElement) {
           cartController.addListenerForBtnRemove(productBox, productInput, amount, cartSumm, summProducts, i);
+          if (cartSumm.innerText === '0') cartName.innerText = 'Ваша корзина пуста';
         }
-      })
+      });
       // ___________________________________
 
       arrElements.push(minus, productInput, plus);

@@ -1,9 +1,14 @@
 .cart-wrap {
   display: grid;
-  grid-template-columns: .7fr .3fr;
+  grid-template-columns: .65fr .3fr;
+  justify-content: center;
   max-width: 130rem;
   margin: auto;
   gap: 2rem;
+
+  @media screen and (max-width: 1236px) {
+    grid-template-columns: .95fr;
+  }
 }
 
 .cart {
@@ -13,9 +18,13 @@
 
   border: .1rem solid #C8CACB;
   border-radius: .8rem;
+  .cart__product:last-child .cart__description-box {
+    border-bottom: none;
+  }
 }
 
 .cart__main-title {
+  margin-left: 3rem;
   margin-bottom: 5rem;
   font-size: 3.6rem;
 }
