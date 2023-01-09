@@ -3,6 +3,11 @@ import MultiRange from './multi-range/multi-range';
 import { Iproduct } from '../../../app/interfaces';
 import FiltersQuery from './filters-query/filters-query';
 
+const FILTERS_CONTAINER = '.filters';
+const FILTERS_SHOW = 'filters-show';
+const BTN_SHOW = '.products__filters-show';
+const BTN_CLOSE = '.filters__close';
+const BODY_BLOCK = 'block';
 const MULTI_RANGE_CONTAINER = '.multi-range';
 const MULTI_RAMGE_TYPES = ['price', 'stock'];
 const INPUT_TYPE = 'checkbox';
@@ -110,16 +115,16 @@ export default class Filters {
   }
 
   private filterToggle(): void {
-    const filtersContainer = document.querySelector('.filters');
+    const filtersContainer = document.querySelector(FILTERS_CONTAINER);
     if (filtersContainer instanceof HTMLElement) {
-      filtersContainer.classList.toggle('filters-show');
-      document.body.classList.toggle('block');
+      filtersContainer.classList.toggle(FILTERS_SHOW);
+      document.body.classList.toggle(BODY_BLOCK);
     }
   }
 
   private setEvents(): void {
-    const btnShow = document.querySelector('.products__filters-show');
-    const btnClose = document.querySelector('.filters__close');
+    const btnShow = document.querySelector(BTN_SHOW);
+    const btnClose = document.querySelector(BTN_CLOSE);
 
     btnShow?.addEventListener('click', () => this.filterToggle());
     btnClose?.addEventListener('click', () => this.filterToggle());

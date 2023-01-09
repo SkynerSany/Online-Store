@@ -18,7 +18,7 @@ export default class Products {
     this.productsCount = products.length;
   }
 
-  public setProducts(): void {
+  public setProducts(filtersChanged: boolean): void {
     const productsContainer = this.container.querySelector(PRODUCTS_CONTAINER);
     const catalogWrapper = this.container.querySelector(CATALOG_CONTAINER);
     if (!productsContainer || !catalogWrapper) return;
@@ -32,7 +32,7 @@ export default class Products {
     productsContainer.innerHTML = '';
     for (let i = fromProduct; i < toProduct; i += 1) {
       if (i >= this.productsCount) {
-        catalogWrapper.scrollIntoView();
+        if (!filtersChanged) catalogWrapper.scrollIntoView();
         return;
       }
 
@@ -40,6 +40,6 @@ export default class Products {
       productsContainer.appendChild(newNode);
     }
 
-    catalogWrapper.scrollIntoView();
+    if (!filtersChanged) catalogWrapper.scrollIntoView();
   }
 }

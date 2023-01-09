@@ -1,11 +1,12 @@
 import createCustomElement, { appendElement } from "../../core/templates/create.elements";
 import Page from "../../core/templates/page";
+import CartController from "./cart-controller";
 import './cart.scss';
 import products from '../../data/products.json';
 import stringToElement from "../../utils/htmlToElement";
 import totalBox from "./cart.temlapte";
 
-interface Iproduct {
+export interface Iproduct {
   'id': number,
   'title': string,
   'description': string,
@@ -32,6 +33,8 @@ class CartPage extends Page {
 
   createCartMainBox(num:number) {
     let arrElements = [];
+    CartController.countProducts = num;
+    const cartController = new CartController();
     // Variables for working with total box
     const boxTotal = stringToElement(totalBox);
     const amount = boxTotal.querySelector('.cart__amount');
@@ -64,31 +67,27 @@ class CartPage extends Page {
       arrElements.push(productImage, productDescription);
       descrContainer.append(...arrElements);
       arrElements = [];
-
+      
       // add listener for button plus and minus
       plus.addEventListener('click', ():void => {
-        if (productInput instanceof HTMLInputElement) {
-          productInput.value = String(+productInput.value + 1);
-          if (amount instanceof HTMLElement && cartSumm instanceof HTMLElement) {
-            amount.innerText = String(+amount.innerText + products.products[i].price);
-            cartSumm.innerText = amount.innerText;
-          }
-        }
-        if (summProducts instanceof HTMLElement) {
-          summProducts.innerText = `${num === 1 ? `${num} товар на сумму` : `${num > 1 && num < 5 ? `${num} товара на сумму` : `${num} товаров на сумму`}`}`;
+        if (productInput && amount instanceof HTMLElement && cartSumm instanceof HTMLElement && summProducts instanceof HTMLElement) {
+          cartController.addListenerForPlus(productInput, amount, cartSumm, summProducts, i);
         }
       });
       minus.addEventListener('click', ():void => {
-        if (productInput instanceof HTMLInputElement) {
-          if (productInput.value === '1') return;
-          productInput.value = String(+productInput.value - 1);
-          if (amount instanceof HTMLElement && cartSumm instanceof HTMLElement) {
-            amount.innerText = String(+amount.innerText - products.products[i].price);
-            cartSumm.innerText = amount.innerText;
-          }
+        if (productInput && amount instanceof HTMLElement && cartSumm instanceof HTMLElement && summProducts instanceof HTMLElement) {
+          cartController.addListenerForMinus(productInput, amount, cartSumm, summProducts, i);
+        }
+      });
+      // ____________________________________
+
+      // add listener for button-remove
+      buttonRemove.addEventListener('click', ():void => {
+        if (productInput && amount instanceof HTMLElement && cartSumm instanceof HTMLElement && summProducts instanceof HTMLElement && productBox instanceof HTMLElement) {
+          cartController.addListenerForBtnRemove(productBox, productInput, amount, cartSumm, summProducts, i);
         }
       })
-      // ____________________________________
+      // ___________________________________
 
       arrElements.push(minus, productInput, plus);
       changeNumberProductsBox.append(...arrElements);

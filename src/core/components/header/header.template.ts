@@ -7,7 +7,9 @@ const HEADER_TEMPLATE =  `<header class="header flex-col">
                                 <a href="tel:+375 29 11 11 11" class="header__number">+375 29 11 11 11</a>
                                 <p class="header__work-time">Пн-вс: с 10:00 до 21:00</p>
                               </div>
-                              <a href="#cart" class="header__cart" aria-label="cart"></a>
+                              <a href="#cart" class="header__cart" aria-label="cart">
+                                <span class="cart-count">0</span>
+                              </a>
                             </div>
                             <div class="header__bottom-row flex-row">
                               <div class="wrapper header__main-menu flex-row">
@@ -16,58 +18,6 @@ const HEADER_TEMPLATE =  `<header class="header flex-col">
                                     <div class="header__burger-img"></div>
                                     <span class="header__menu-name">Каталог товаров</span>
                                   </div>
-                                  <ul class="header__menu">
-                                    <li class="menu-item flex-row">
-                                      <div class="header__menu-icon header__menu-electronic"></div>
-                                      <a href="#">Electronics</a>
-                                      <ul class="list-two">
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-smartphone"></div>
-                                          <a href="#">Smartphones</a>
-                                        </li>
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-laptop"></div>
-                                          <a href="#">Laptops</a>
-                                        </li>
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-tablet"></div>
-                                          <a href="#">Tablets</a>
-                                        </li>
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-watch"></div>
-                                          <a href="#">Smart-wacth</a>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                    <li class="menu-item">
-                                      <div class="header__menu-icon header__menu-home"></div>
-                                      <a href="#">Household products</a>
-                                      <ul class="list-two">
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-electronic"></div>
-                                          <a href="#">Smartphones</a>
-                                        </li>
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-electronic"></div>
-                                          <a href="#">Electronics</a>
-                                        </li>
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-electronic"></div>
-                                          <a href="#">Electronics</a>
-                                        </li>
-                                        <li class="menu-item flex-row">
-                                          <div class="header__menu-icon header__menu-electronic"></div>
-                                          <a href="#">Electronics</a>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                  </ul>
-                                </nav>
-                                <nav class="header__sub-nav">
-                                  <ul class="header__sub-menu flex-row">
-                                    <li><a href="#">Акции</a></li>
-                                    <li><a href="#">Контакты</a></li>
-                                  </ul>
                                 </nav>
                               </div>
                             </div>

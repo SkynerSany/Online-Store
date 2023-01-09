@@ -2,38 +2,30 @@ import stringToElement from '../../../utils/htmlToElement';
 import HEADER_TEMPLATE from './header.template';
 import './header.scss';
 
+const BTN_CART = '.cart-count';
+const BTN_MENU = '.header__main-nav';
+const CATALOG_HASH = '#catalog';
+const STORAGE_NAME = 'storeCart';
+
 const headerElement: HTMLTemplateElement = stringToElement(HEADER_TEMPLATE);
 
-const toggleActiveClasessForMenu = ():void => {
-  const headerMenu = document.querySelector('.header__menu');
-  const burger = document.querySelector('.header__burger-img');
-  if (headerMenu instanceof HTMLElement && burger instanceof HTMLElement) {
-    headerMenu.classList.toggle('header__menu_active');
-    burger.classList.toggle('menu-active');
-  }
+export function showCartCount(): void {
+  const btnCart = document.querySelector(BTN_CART);
+  const storage = localStorage.getItem(STORAGE_NAME);
+  if (!storage || !btnCart) return;
+
+  const storageArr = JSON.parse(storage) as string[];
+  btnCart.textContent = `${ storageArr.length }`;
 }
 
-export const removeActiveClassesForMenu = (): void => {
-  const headerMenu = document.querySelector('.header__menu');
-  const burger = document.querySelector('.header__burger-img');
-  if (headerMenu instanceof HTMLElement && burger instanceof HTMLElement) {
-    headerMenu.classList.remove('header__menu_active');
-    burger.classList.remove('menu-active');
-  }
-}
+export const addListenerForMenu = (): void => {
+  const menuBtn = document.querySelector(BTN_MENU);
+  
+  menuBtn?.addEventListener('click', () => {
+    window.location.hash = CATALOG_HASH;
+  });
 
-export const addListenerForMenu = ():void => {
-  const menuBtn = document.querySelector('.header__main-nav');
-  if (menuBtn instanceof HTMLElement) {
-    menuBtn.addEventListener('click', () => {
-      // toggleActiveClasessForMenu();
-      window.location.hash = '#catalog';
-    });
-    const arrMenuItems = document.querySelectorAll('.menu-item');
-    arrMenuItems.forEach((elem) => {
-      elem.addEventListener('click', removeActiveClassesForMenu);
-    });
-  }
+  showCartCount();
 }
 
 export const hideHeaderLineMenu = (idPage: string):void => {

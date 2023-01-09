@@ -44,6 +44,7 @@
 
 .filters {
   width: 31rem;
+  margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -196,4 +197,87 @@
 
   max-height: 20rem;
   overflow: auto;
+}
+
+.filter-text__container {
+  position: relative;
+  border-radius: 1rem;
+
+  .filter-text__input, 
+  .filter-text__btn {
+    height: 5rem;
+    border: 0.1rem solid $color-light-grey;
+    font-size: 1.8rem;
+  }
+}
+
+.filter-text__input {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  padding: 0 2rem;
+
+  color: $text-color-medium;
+  
+  background: $text-color-white;
+  border-radius: 1rem;
+  outline: 0;
+  appearance: none;
+
+  transition: all .3s cubic-bezier(0, 0, 0.43, 1.49);
+  transition-property: width, border-radius;
+  
+  &:not(:placeholder-shown) {
+    width: calc(100% - 6rem);
+
+    border-radius: 1rem 0 0 1rem;
+
+    & + .filter-text__btn {
+      display: block;
+    }
+  }
+}
+
+.filter-text__btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  
+  width: 6rem;
+  display: none;
+
+  color: $text-color-white;
+  font-weight: bold;
+  
+  background-color: $color-blue;
+  background-image: url(../../../assets/icons/search.svg);
+  background-repeat: no-repeat;
+  background-size: 4rem;
+  background-position: center;
+  border-radius: 0 1rem 1rem 0;
+  cursor: pointer;
+}
+
+.filters__btn-clear {
+  height: 40px;
+  padding: 1rem;
+
+  font-size: 1.6rem;
+  color: $text-color-white;
+
+  background-color: $color-blue;
+  border-radius: 0.4rem;
+  outline: none;
+  cursor: pointer;
+
+  transition: background-color $duration-fast linear;
+
+  &:hover {
+    background-color: $color-dark-blue;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 }

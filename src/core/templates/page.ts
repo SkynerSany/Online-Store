@@ -13,7 +13,7 @@ abstract class Page {
     headerTitle.innerText = text;
     return headerTitle;
   }
-  
+
   render() {
     return this.container;
   }
