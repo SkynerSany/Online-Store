@@ -3,6 +3,7 @@ import PRODUCT_TEMPLATE from './product.template';
 import { Iproduct } from '../../../../app/interfaces';
 import { showCartCount } from '../../header/header';
 import './product.scss';
+import Modal from '../../modal-window/modal';
 
 const ACTIVE_IMAGE = 'image-active';
 const SLIDER_IMAGES = 'product__slider-img';
@@ -88,10 +89,12 @@ export default class Product {
   private setEvents(newNode: HTMLTemplateElement): void {
     const btnAddToCart = newNode.querySelector(`.${ BTN_ADD_TO_CART.DEFAULT }`);
     const imgContainer = newNode.querySelector(PRODUCT_IMG_CONTAINER);
+    const buy = newNode.querySelector('.product__buy');
     if (!(btnAddToCart instanceof HTMLButtonElement)) return;
 
     btnAddToCart.addEventListener('click', () => this.addToCart(btnAddToCart, newNode));
     imgContainer?.addEventListener('click', () => this.openProductInfo(newNode));
+    buy?.addEventListener('click', () => new Modal().render())
   }
   
   private setImage(e: Event): void {
