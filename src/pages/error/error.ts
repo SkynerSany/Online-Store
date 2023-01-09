@@ -16,7 +16,6 @@ class ErrorPage extends Page {
     this.errorType = errorType;
   }
 
-
   render(): HTMLElement {
     const errorPage: HTMLTemplateElement = stringToElement(ERROR_PAGE_TEMPLATE);
     this.container.append(errorPage);

@@ -3,6 +3,7 @@ import Pagination from "../../pagination/pagination";
 import { loadCheckbox, loadDoubleRange, loadInputText } from "./load-quary";
 import { removeCheckbox, removeDoubleRange, removeInputText } from "./remove-filters";
 
+const PRODUCT_COUNT = '.products__count';
 const FORM_SEARCH_NAME = '#search-form'
 const FORM_PRICE_NAME = '#price-form';
 const FORM_STOCK_NAME = '#stock-form';
@@ -66,8 +67,11 @@ export default class FiltersQuery {
     const brand = loadCheckbox(queryParams, FILTER_TYPES.BRAND);
     const category = loadCheckbox(queryParams, FILTER_TYPES.CATEGORY);
     const sort = queryParams.get(FILTER_TYPES.SORT) || SORT_TYPES.PRICE_LOW;
+    const productCount = document.querySelector(PRODUCT_COUNT);
 
     const newProducts = this.filterProducts(price, stock, brand, category, sort, search);
+    
+    if (productCount) productCount.textContent = `${ newProducts.length }`;
     new Pagination(
         queryParams.toString().length ? newProducts : this.sortingProducts(this.productsData, sort), 
         this.container,
@@ -132,14 +136,6 @@ export default class FiltersQuery {
     return queryParams;
   }
 
-  private sortingProducts(products: Iproduct[], sort: string): Iproduct[] {
-    return products.sort((a, b) => {
-      if (sort === 'sort-price-low') return a.price - b.price;
-      if (sort === 'sort-price-high') return b.price - a.price;
-      return b.discountPercentage - a.discountPercentage;
-    });
-  }
-
   private setFormEvents(): void {
     const formSearch = document.querySelector(FORM_SEARCH_NAME);
     const formPrice = document.querySelector(FORM_PRICE_NAME);
@@ -178,10 +174,9 @@ export default class FiltersQuery {
   }
 
   private setChanges(queryParams: URLSearchParams): void {
-    const link = `${ window.location.protocol }//${ window.location.host }${ window.location.pathname }`;
     const quaryStr = queryParams.toString();
     const quaryOperator = quaryStr.length ? '?' : '';
-    const resultLink = `${ link }${ quaryOperator }${ quaryStr }${ window.location.hash }`;
+    const resultLink = `${ window.location.origin }${ quaryOperator }${ quaryStr }${ window.location.hash }`;
     if (window.location.href !== resultLink) {
       window.history.pushState({ path: resultLink }, '', resultLink);
     }

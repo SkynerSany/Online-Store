@@ -11,7 +11,15 @@ const PRODUCT_TEMLATE =  `<div class="product">
                                 <p class="product__description"></p>
                                 <div class="product__stars">
                                 </div>
-                                <div class="product__price"></div>
+                                <div class="product__price">
+                                  <div class="product__discount-container">
+                                    <p class="product__price-before"></p>
+                                    <div class="product__discount-wrapper">
+                                      <p class="product__discount-percent"></p>
+                                    </div>
+                                  </div>
+                                  <p class="product__price-after"></p>
+                                </div>
                               </div>
                               <div class="product__btns">
                                 <button class="product__buy">Купить в 1 клик</button>
