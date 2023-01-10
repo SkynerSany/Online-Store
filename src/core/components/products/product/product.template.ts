@@ -7,9 +7,10 @@ const PRODUCT_TEMLATE =  `<div class="product">
                                 </div>
                                 <img src="" alt="product" class="product__image">
                               </div>
-                                <h3 class="product__name"></h3>
-                                <p class="product__description"></p>
-                                <div class="product__stars">
+                                <div>
+                                  <h3 class="product__name"></h3>
+                                  <p class="product__description"></p>
+                                  <div class="product__stars"></div>
                                 </div>
                                 <div class="product__price">
                                   <div class="product__discount-container">

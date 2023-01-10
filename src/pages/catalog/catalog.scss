@@ -26,6 +26,28 @@
   }
 }
 
+.mode-view {
+  height: 4rem;
+  width: 4rem;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+
+  &.mode-table {
+    background-image: url(../../assets/icons/view-table.svg);
+  }
+
+  &.mode-list {
+    background-image: url(../../assets/icons/view-list.svg);
+  }
+
+  @media screen and (max-width: $large) {
+    display: none;
+  }
+}
+
 .not-found {
   display: none;
 

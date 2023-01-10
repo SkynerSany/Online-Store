@@ -113,7 +113,9 @@ export default class FiltersQuery {
     const search = searchParam.toLowerCase();
     return (product.title.toLowerCase().includes(search)
       || product.category.toLowerCase().includes(search)
-      || product.brand.toLowerCase().includes(search)
+      || product.price === +search
+      || product.description.toLowerCase().includes(search)
+      || product.stock === +search
     )
   }
 
