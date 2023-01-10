@@ -6,7 +6,7 @@ import products from '../../data/products.json';
 import stringToElement from "../../utils/htmlToElement";
 import totalBox from "./cart.temlapte";
 import Product from "../../core/components/products/product/product";
-import { devServer } from "../../../webpack.dev.config";
+import Modal from "../../core/components/modal-window/modal";
 
 export interface Iproduct {
   'id': number,
@@ -48,9 +48,18 @@ class CartPage extends Page {
     const promoBtn = boxTotal.querySelector('.cart__promo-btn');
     const sumWithDisc = boxTotal.querySelector('.cart__summ-box_not-active');
     const sumWithoutDisc = boxTotal.querySelector('.cart__summ-box');
+    const totalBoxBtn = boxTotal.querySelector('.cart__order');
 
-    if (summProducts instanceof HTMLElement) {
+    if (summProducts instanceof HTMLElement && totalBoxBtn instanceof HTMLButtonElement && boxTotal instanceof HTMLElement) {
       summProducts.innerText = `${CartController.countProducts === 1 ? `${CartController.countProducts} товар на сумму` : `${CartController.countProducts > 1 && CartController.countProducts < 5 ? `${CartController.countProducts} товара на сумму` : `${CartController.countProducts} товаров на сумму`}`}`;
+      cartController.checkEmptyCart(totalBoxBtn);
+      this.addClassForTotalBox(boxTotal);
+      if (totalBoxBtn.classList.contains('cart__order_active')) {
+        totalBoxBtn.addEventListener('click', ():void => {
+          const modal = new Modal();
+          modal.render();
+        });
+      }
     }
 
     const cartWrapper = createCustomElement('div', 'cart-wrap', '', '', '', '');
@@ -73,7 +82,7 @@ class CartPage extends Page {
       const plus = createCustomElement('button', 'cart__product-plus', '+');
       const productInput = createCustomElement('div', 'cart__product-input', '1');
       const currentPrice = createCustomElement('span', 'cart__cur-price', `${currentProduct.price} p.`);
-      const buttonRemove = createCustomElement('button', 'cart__remove-product', '', '', '', '');
+      const buttonRemove = createCustomElement('button', 'cart__remove-product');
       const removeIcon = createCustomElement('img', 'cart__remove-img', '', '../../assets/icons/cart/remove.svg');
       arrElements.push(productImage, productDescription);
       descrContainer.append(...arrElements);
@@ -88,7 +97,13 @@ class CartPage extends Page {
         if (productInput instanceof HTMLElement
           && amount instanceof HTMLElement
           && cartSumm instanceof HTMLElement
-          && summProducts instanceof HTMLElement) {
+          && summProducts instanceof HTMLElement
+          && sumWithDisc instanceof HTMLElement
+          && sumWithoutDisc instanceof HTMLElement
+          && totalInput instanceof HTMLInputElement) {
+          totalInput.value = '';
+          sumWithDisc.classList.add('cart__summ-box_not-active');
+          sumWithoutDisc.classList.remove('cart__summ-box_none');
           cartController.addListenerForPlus(productInput, amount, cartSumm, summProducts, +array[i] - 1);
         }
       });
@@ -96,8 +111,24 @@ class CartPage extends Page {
         if (productInput instanceof HTMLElement 
           && amount instanceof HTMLElement 
           && cartSumm instanceof HTMLElement 
-          && summProducts instanceof HTMLElement) {
+          && summProducts instanceof HTMLElement
+          && sumWithDisc instanceof HTMLElement
+          && sumWithoutDisc instanceof HTMLElement
+          && totalInput instanceof HTMLInputElement
+          && totalBoxBtn instanceof HTMLButtonElement
+          && boxTotal instanceof HTMLElement) {
           cartController.addListenerForMinus(productInput, amount, cartSumm, summProducts, +array[i] - 1);
+          if (productInput.innerText < '1') {
+            cartController.addListenerForBtnRemove(productBox, productInput, amount, cartSumm, summProducts, +array[i] - 1, totalBoxBtn);
+          }
+          if (cartSumm.innerText.slice(0, cartSumm.innerText.length - 2) === '0') {
+            cartName.innerText = 'Ваша корзина пуста';
+            totalBoxBtn.classList.remove('cart__order_active');
+          }
+          totalInput.value = '';
+          sumWithDisc.classList.add('cart__summ-box_not-active');
+          sumWithoutDisc.classList.remove('cart__summ-box_none');
+          this.addClassForTotalBox(boxTotal);
         }
       });
       // ____________________________________
@@ -110,11 +141,19 @@ class CartPage extends Page {
           && summProducts instanceof HTMLElement
           && productBox instanceof HTMLElement
           && sumWithDisc instanceof HTMLElement
-          && sumWithoutDisc instanceof HTMLElement) {
-          cartController.addListenerForBtnRemove(productBox, productInput, amount, cartSumm, summProducts, +array[i] - 1);
+          && sumWithoutDisc instanceof HTMLElement
+          && totalInput instanceof HTMLInputElement
+          && totalBoxBtn instanceof HTMLButtonElement
+          && boxTotal instanceof HTMLElement) {
+          totalInput.value = '';
+          cartController.addListenerForBtnRemove(productBox, productInput, amount, cartSumm, summProducts, +array[i] - 1, totalBoxBtn);
           sumWithDisc.classList.add('cart__summ-box_not-active');
           sumWithoutDisc.classList.remove('cart__summ-box_none');
-          if (cartSumm.innerText === '0') cartName.innerText = 'Ваша корзина пуста';
+          if (cartSumm.innerText.slice(0, cartSumm.innerText.length - 2) === '0') {
+            cartName.innerText = 'Ваша корзина пуста';
+            totalBoxBtn.classList.remove('cart__order_active');
+          }
+          this.addClassForTotalBox(boxTotal);
         }
       });
       // ___________________________________
@@ -123,8 +162,7 @@ class CartPage extends Page {
         if (
           sumWithDisc instanceof HTMLElement 
           && sumWithoutDisc instanceof HTMLElement 
-          && amount instanceof HTMLElement
-          ) {
+          && amount instanceof HTMLElement) {
           cartController.addFeaturesForClick(sumWithDisc, sumWithoutDisc, amount);
           boxPromoDescr?.classList.remove('cart__promo-desc_active');
         }
@@ -143,11 +181,11 @@ class CartPage extends Page {
         removeIcon.src = '../../assets/icons/cart/remove.svg';
       }
 
-      descriptionBox.append(descrContainer);
-      descriptionBox.append(changeNumberProductsBox); 
-      descriptionBox.append(currentPrice);
-      descriptionBox.append(buttonRemove);
-      productBox.append(descriptionBox);
+      appendElement(descriptionBox, descrContainer);
+      appendElement(descriptionBox, changeNumberProductsBox);
+      appendElement(descriptionBox, currentPrice);
+      appendElement(descriptionBox, buttonRemove);
+      appendElement(productBox, descriptionBox);
       appendElement(cart, productBox);
       appendElement(cartWrapper, cart);
 
@@ -163,6 +201,16 @@ class CartPage extends Page {
     }
     appendElement(cartWrapper, boxTotal);
     this.container.append(cartWrapper);
+  }
+
+  addClassForTotalBox(elem: HTMLElement): void {
+    if (elem instanceof HTMLElement) {
+      if (CartController.countProducts) {
+        elem.classList.add('cart__total-box_active');
+      } else {
+        elem.classList.remove('cart__total-box_active');
+      }
+    }
   }
 
   render() {

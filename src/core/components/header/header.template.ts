@@ -19,6 +19,10 @@ const HEADER_TEMPLATE =  `<header class="header flex-col">
                                     <span class="header__menu-name">Каталог товаров</span>
                                   </div>
                                 </nav>
+                                <p class="cart-total">
+                                  <span>Всего в корзине на</span>
+                                  <span class="cart-total__price"></span>
+                                </p>
                               </div>
                             </div>
                           </div>

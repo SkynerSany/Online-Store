@@ -3,6 +3,7 @@ import PRODUCT_TEMPLATE from './product.template';
 import { Iproduct } from '../../../../app/interfaces';
 import { showCartCount } from '../../header/header';
 import './product.scss';
+import Modal from '../../modal-window/modal';
 
 const ACTIVE_IMAGE = 'image-active';
 const SLIDER_IMAGES = 'product__slider-img';
@@ -90,10 +91,33 @@ export default class Product {
   private setEvents(newNode: HTMLTemplateElement): void {
     const btnAddToCart = newNode.querySelector(`.${ BTN_ADD_TO_CART.DEFAULT }`);
     const imgContainer = newNode.querySelector(PRODUCT_IMG_CONTAINER);
+    const buy = newNode.querySelector('.product__buy');
     if (!(btnAddToCart instanceof HTMLButtonElement)) return;
 
     btnAddToCart.addEventListener('click', () => this.addToCart(btnAddToCart, newNode));
     imgContainer?.addEventListener('click', () => Product.openProductInfo(newNode));
+    buy?.addEventListener('click', () => this.openCart(newNode));
+  }
+
+  private openCart(newNode: HTMLElement): void {
+    const storage = localStorage.getItem(STORAGE_NAME);
+    const { productId } = newNode.dataset;
+    if (!productId) return;
+
+    if (!storage) {
+      localStorage.storeCart = JSON.stringify([productId]);
+      return;
+    }
+
+    const cart = JSON.parse(storage) as string[];
+
+    if (!cart.includes(productId)) {
+      localStorage.setItem(STORAGE_NAME, JSON.stringify([...cart, productId]));
+      showCartCount();
+    }
+
+    window.location.hash = '#cart';
+    new Modal().render();
   }
   
   private setImage(e: Event): void {

@@ -3,6 +3,7 @@ import Pagination from "../../pagination/pagination";
 import { loadCheckbox, loadDoubleRange, loadInputText } from "./load-quary";
 import { removeCheckbox, removeDoubleRange, removeInputText } from "./remove-filters";
 
+const NOT_FOUND = '.not-found';
 const PRODUCT_COUNT = '.products__count';
 const FORM_SEARCH_NAME = '#search-form'
 const FORM_PRICE_NAME = '#price-form';
@@ -68,10 +69,17 @@ export default class FiltersQuery {
     const category = loadCheckbox(queryParams, FILTER_TYPES.CATEGORY);
     const sort = queryParams.get(FILTER_TYPES.SORT) || SORT_TYPES.PRICE_LOW;
     const productCount = document.querySelector(PRODUCT_COUNT);
+    const notFound = document.querySelector(NOT_FOUND);
 
     const newProducts = this.filterProducts(price, stock, brand, category, sort, search);
     
-    if (productCount) productCount.textContent = `${ newProducts.length }`;
+    if (productCount) {
+      productCount.textContent = `${ newProducts.length }`;
+      if (notFound instanceof HTMLElement) {
+        notFound.style.display = newProducts.length ? 'none' : 'block';
+      }
+    }
+
     new Pagination(
         queryParams.toString().length ? newProducts : this.sortingProducts(this.productsData, sort), 
         this.container,
@@ -90,15 +98,23 @@ export default class FiltersQuery {
     let products = this.productsData.filter((product) => brand.length ? brand.includes(product.brand) : product);
     products = products.filter((product) => category.length ? category.includes(product.category) : product);
     if (price.length) products = products.filter(
-      (product) => +product.price > +price[0] && +product.price < +price[1] ? product : false
+      (product) => +product.price >= +price[0] && +product.price <= +price[1] ? product : false
     );
     if (stock.length) products = products.filter(
-      (product) => +product.stock > +stock[0] && +product.stock < +stock[1] ? product : false
+      (product) => +product.stock >= +stock[0] && +product.stock <= +stock[1] ? product : false
     );
-    products = products.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()));
+    products = products.filter((product) => this.searchProducts(product, search));
     products = this.sortingProducts(products, sort);
 
     return products;
+  }
+
+  private searchProducts(product: Iproduct, searchParam: string): boolean {
+    const search = searchParam.toLowerCase();
+    return (product.title.toLowerCase().includes(search)
+      || product.category.toLowerCase().includes(search)
+      || product.brand.toLowerCase().includes(search)
+    )
   }
 
   private sortingProducts(products: Iproduct[], sort: string): Iproduct[] {

@@ -25,3 +25,12 @@
     grid-template-columns: auto;
   }
 }
+
+.not-found {
+  display: none;
+
+  font-size: 3rem;
+  font-weight: 900;
+  color: $text-color-medium;
+  text-align: center;
+}

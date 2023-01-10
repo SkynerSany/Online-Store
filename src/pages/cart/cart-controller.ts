@@ -14,7 +14,6 @@ class CartController {
       if (elemAmount instanceof HTMLElement && elemSum instanceof HTMLElement) {
         const amount = elemAmount;
         const cartSumm = elemSum;
-        // amount.innerText = String(+amount.innerText + products.products[index].price);
         amount.innerText = `${+amount.innerText.slice(0, amount.innerText.length - 2) + products.products[index].price} p`;
         cartSumm.innerText = amount.innerText;
       }
@@ -28,7 +27,6 @@ class CartController {
   public addListenerForMinus(elemInput: HTMLElement, elemAmount: HTMLElement, elemSum: HTMLElement, elemSumProducts:HTMLElement, index: number): void {
     if (elemInput instanceof HTMLElement) {
       const productInput = elemInput;
-      if (productInput.innerText === '1') return;
       CartController.countProducts -= 1;
       const countProducts = String(+productInput.innerText - 1);
       productInput.innerText = countProducts;
@@ -45,7 +43,7 @@ class CartController {
     }
   }
 
-  public addListenerForBtnRemove(currentBox: HTMLElement, elemInput: HTMLElement, elemAmount: HTMLElement, elemSum: HTMLElement, elemSumProducts:HTMLElement, index:number):void {
+  public addListenerForBtnRemove(currentBox: HTMLElement, elemInput: HTMLElement, elemAmount: HTMLElement, elemSum: HTMLElement, elemSumProducts:HTMLElement, index:number, elemBtn: HTMLButtonElement):void {
     const storage = localStorage.getItem('storeCart');
     if (storage) {
       const arrayProducts = JSON.parse(storage) as string[];
@@ -67,8 +65,9 @@ class CartController {
       const summProducts = elemSumProducts;
       summProducts.innerText = `${CartController.countProducts === 1 ? `${CartController.countProducts} товар на сумму` : `${CartController.countProducts > 1 && CartController.
       countProducts < 5 ? `${CartController.countProducts} товара на сумму` : `${CartController.countProducts} товаров на сумму`}`}`;
-    }
+    } 
     currentBox.remove();
+    this.checkEmptyCart(elemBtn);
   }
 
   public addDiscountForPromo (inputElement: HTMLInputElement, boxPromoDescr: HTMLElement) {
@@ -90,14 +89,24 @@ class CartController {
       }
     }
 
-    public addFeaturesForClick (elem:HTMLElement, elem2:HTMLElement, elemAmount:HTMLElement) {
-      elem.classList.remove('cart__summ-box_not-active');
-      elem2.classList.add('cart__summ-box_none');
-      const elemSumm = elem.querySelector('.cart__summ');
+    public addFeaturesForClick (boxTotalOne:HTMLElement, boxTotalTwo:HTMLElement, elemAmount:HTMLElement) {
+      boxTotalOne.classList.remove('cart__summ-box_not-active');
+      boxTotalTwo.classList.add('cart__summ-box_none');
+      const elemSumm = boxTotalOne.querySelector('.cart__summ');
       if (elemAmount instanceof HTMLElement && elemSumm instanceof HTMLElement) {
         const amount = elemAmount;
         const disc =`${(+amount.innerText.slice(0, amount.innerText.length - 2) / 100) * 10}`;
         elemSumm.innerText = `${(+amount.innerText.slice(0, amount.innerText.length - 2)) - +disc} р`;
+      }
+    }
+
+    public checkEmptyCart(element: HTMLButtonElement) {
+      const storage = localStorage.getItem('storeCart');
+      if (storage) {
+        const arrayProducts = JSON.parse(storage) as string[];
+        if (arrayProducts.length !== 0) {
+          if (element instanceof HTMLButtonElement) element.classList.add('cart__order_active');
+        }
       }
     }
 }

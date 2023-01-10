@@ -12,7 +12,8 @@
 }
 
 .cart {
-  max-height: fit-content;
+  display: flex;
+  flex-direction: column;
 
   padding: 3rem;
 
@@ -36,7 +37,6 @@
 
 .cart__product {
   width: 100%;
-  height: 10rem;
 }
 
 .cart__description-box {
@@ -47,10 +47,20 @@
   padding-bottom: 3rem;
 
   border-bottom: .1rem solid $text-color-medium;
+  @media screen and (max-width: 750px) {
+    display: grid;
+    grid-template-areas:
+    "descripction remove"
+    "input price";
+    grid-template-columns: repeat(auto-fitt, minmax(30%, 1fr));
+    gap: 1.5rem;
+  }
 }
 
 .cart__descr-container {
+  grid-area: descripction;
   align-items: center;
+  margin: auto;
   cursor: pointer;
 }
 
@@ -86,6 +96,7 @@
 }
 
 .cart__total-box {
+  display: none;
   height: fit-content;
 
   padding: 3rem;
@@ -96,6 +107,10 @@
   .cart__title {
     margin-bottom: 1.7rem;
   }
+}
+
+.cart__total-box_active {
+  display: flex;
 }
 
 .cart__number-products,
@@ -123,7 +138,6 @@
 
 .cart__summ-box {
   justify-content: space-between;
-  align-items: baseline;
 }
 
 .cart__payment {
@@ -149,9 +163,16 @@
 }
 
 .cart__change-number {
+  grid-area: input;
   width: 10rem;
+  margin-left: 3.5rem;
   justify-content: space-between;
   align-items: center;
+}
+
+.cart__remove-product {
+  grid-area: remove;
+  margin-left: auto;
 }
 
 .cart__product-input {
@@ -167,6 +188,8 @@
 }
 
 .cart__cur-price {
+  grid-area: price;
+  margin-left: auto;
   font-size: 2.4rem;
   font-weight: 700;
 }
@@ -235,4 +258,11 @@
   width: 100%;
   height: .1rem;
   background-color: $text-color-medium;
+}
+
+.cart__order_active {
+  @include buttonSite;
+  &:hover {
+    background-color: $color-dark-blue;
+  }
 }
