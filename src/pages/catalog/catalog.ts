@@ -9,6 +9,24 @@ import './catalog.scss';
 class CatalogPage extends Page {
   private catalogPage!: HTMLTemplateElement;
 
+  private saveLink(e: Event): void {
+    const target = e.currentTarget;
+    if (!(target instanceof HTMLButtonElement)) return;
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => {
+        target.textContent = 'Ссылка скопирована!';
+        target.disabled = true;
+        target.classList.toggle('btn-confirm');
+
+        setTimeout(() => {
+          target.textContent = 'Скопировать ссылку'
+          target.disabled = false;
+          target.classList.toggle('btn-confirm');
+        }, 1000);
+      },
+      (err) => console.log(err));
+  }
+
   private loadMode(): void {
     const modeBtn = this.catalogPage.querySelector('.mode-view');
     if (!modeBtn) return;
@@ -51,7 +69,9 @@ class CatalogPage extends Page {
   public render(): HTMLElement {
     this.catalogPage = stringToElement(CATALOG_TEMPLATE);
     const modeBtn = this.catalogPage.querySelector('.mode-view');
+    const saveBtn = this.catalogPage.querySelector('.copy-link');
     modeBtn?.addEventListener('click', (e) => this.changeModeView(e))
+    saveBtn?.addEventListener('click', (e) => this.saveLink(e))
 
     this.loadMode();
     this.container.append(this.catalogPage);

@@ -69,6 +69,7 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                       <span class="products__count"></span>
                                     </p>
                                     <button class="mode-view mode-table"></button>
+                                    <button class="copy-link">Скопировать ссылку</button>
                                     <div class="products__filters-show">
                                       <div class="products__filters-image"></div>
                                       <span>Фильтры</span>

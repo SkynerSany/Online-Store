@@ -48,6 +48,35 @@
   }
 }
 
+.copy-link {
+  padding: 1rem;
+
+  font-size: 1.6rem;
+
+  background: #ffffff;
+  border: 0.1rem solid #4878a6;
+  border-radius: 0.4rem;
+  cursor: pointer;
+
+  &:not(:disabled):hover {
+    background-color: $color-light-blue;
+  }
+
+  &:not(:disabled):active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    color: $text-color-white;
+
+    background-color: $color-blue;
+  }
+
+  @media screen and (max-width: $large) {
+    display: none;
+  }
+}
+
 .not-found {
   display: none;
 
