@@ -98,10 +98,10 @@ export default class FiltersQuery {
     let products = this.productsData.filter((product) => brand.length ? brand.includes(product.brand) : product);
     products = products.filter((product) => category.length ? category.includes(product.category) : product);
     if (price.length) products = products.filter(
-      (product) => +product.price > +price[0] && +product.price < +price[1] ? product : false
+      (product) => +product.price >= +price[0] && +product.price <= +price[1] ? product : false
     );
     if (stock.length) products = products.filter(
-      (product) => +product.stock > +stock[0] && +product.stock < +stock[1] ? product : false
+      (product) => +product.stock >= +stock[0] && +product.stock <= +stock[1] ? product : false
     );
     products = products.filter((product) => this.searchProducts(product, search));
     products = this.sortingProducts(products, sort);

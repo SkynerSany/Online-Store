@@ -73,14 +73,52 @@ export default class Modal {
     return true;
   }
 
+  private dateFill(e: Event): void {
+    if (!(e.currentTarget instanceof HTMLInputElement)) return;
+    const input = e.currentTarget;
+
+    if (Number.isNaN(+input.value.replace('/', '')) || input.value.includes(' ')) input.value = input.value.slice(0, -1);
+
+    input.value = input.value.replace(
+      /^([1-9]\/|[2-9])$/g, '0$1/'
+    ).replace(
+      /^(0[1-9]|1[0-2])$/g, '$1/'
+    ).replace(
+      /^([0-1])([3-9])$/g, '0$1/$2'
+    ).replace(
+      /^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2'
+    ).replace(
+      /^([0]+)\/|[0]+$/g, '0'
+    ).replace(
+      /\/\//g, '/'
+    );
+
+    const mm = input.value.slice(0, 2);
+    const yy = input.value.slice(3);
+    if (+mm > 12) input.value = input.value.replace(mm, '12');
+    if (+yy > 12) input.value = input.value.replace(yy, '12');
+  }
+
+  private isNumber(e: Event): void {
+    if (!(e.currentTarget instanceof HTMLInputElement)) return;
+    const input = e.currentTarget;
+
+    if (Number.isNaN(+input.value) || input.value.includes(' ')) input.value = input.value.slice(0, -1);
+  }
+
   public render(): void {
     const modalTemplate = stringToElement(MODAL_TEMPLATE);
     const form = modalTemplate.querySelector('.modal__form');
+    const date = modalTemplate.querySelector('#card-date');
+    const number = modalTemplate.querySelector('#card-number');
+    const cvv = modalTemplate.querySelector('#card-cvv');
 
     modalTemplate.addEventListener('click', (e) => this.close(modalTemplate, e));
     form?.addEventListener('submit', (e) => this.confirm(modalTemplate, e));
+    date?.addEventListener('input', (e) => this.dateFill(e));
+    number?.addEventListener('input', (e) => this.isNumber(e));
+    cvv?.addEventListener('input', (e) => this.isNumber(e));
 
     document.body.append(modalTemplate);
-    document.body.classList.toggle('block')
   }
 }

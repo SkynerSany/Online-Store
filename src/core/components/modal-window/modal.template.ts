@@ -17,12 +17,12 @@ const MODAL_TEMPLATE =  `<div class="modal-backDrop">
         </div>
         <div class="card__row-container">
           <div class="card__input-container">
-            <label for="card-cvv" class="card__input-label">Срок действия</label>
-            <input type="text" name="" pattern="[0-9]+/[0-9]{2}" title="Формат 12/12" maxlength="5" id="card-cvv" placeholder="MM/YY" class="card__input" required>
+            <label for="card-date" class="card__input-label">Срок действия</label>
+            <input type="text" name="" pattern="[0-9]+/[0-9]{2}" title="Формат 12/12" maxlength="5" id="card-date" placeholder="MM/YY" class="card__input" required>
           </div>
           <div class="card__input-container">
-            <label for="card-date" class="card__input-label">CVC</label>
-            <input type="text" name="" maxlength="3" id="card-date" pattern="[0-9]{3}" title="Должно быть 3 цифры" placeholder="•••" class="card__input" required>
+            <label for="card-cvv" class="card__input-label">CVV</label>
+            <input type="text" name="" maxlength="3" id="card-cvv" pattern="[0-9]{3}" title="Должно быть 3 цифры" placeholder="•••" class="card__input" required>
           </div>
         </div>
       </div>

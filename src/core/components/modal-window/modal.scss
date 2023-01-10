@@ -1,5 +1,5 @@
 .modal-backDrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
@@ -29,6 +29,7 @@
 
 .modal__title {
   font-size: 3rem;
+  text-align: center;
 }
 
 .modal__form {
@@ -63,11 +64,8 @@
 }
 
 .modal__card {
-  width: 60%;
-}
-
-.modal__card-title {
-
+  width: 100%;
+  max-width: 40rem;
 }
 
 .card__container {
@@ -78,6 +76,10 @@
 
   background-color: $color-blue;
   border-radius: 1rem;
+
+  @media screen and (max-width: $small) {
+    padding: 2rem;
+  }
 }
 
 .card__number-container {
@@ -101,6 +103,10 @@
 
   font-size: 1.6rem;
   color: $color-orange;
+
+  @media screen and (max-width: $small) {
+    font-size: 4vw;
+  }
 }
 
 .card__input {

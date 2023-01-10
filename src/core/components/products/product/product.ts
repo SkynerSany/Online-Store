@@ -94,7 +94,28 @@ export default class Product {
 
     btnAddToCart.addEventListener('click', () => this.addToCart(btnAddToCart, newNode));
     imgContainer?.addEventListener('click', () => this.openProductInfo(newNode));
-    buy?.addEventListener('click', () => new Modal().render())
+    buy?.addEventListener('click', () => this.openCart(newNode));
+  }
+
+  private openCart(newNode: HTMLElement): void {
+    const storage = localStorage.getItem(STORAGE_NAME);
+    const { productId } = newNode.dataset;
+    if (!productId) return;
+
+    if (!storage) {
+      localStorage.storeCart = JSON.stringify([productId]);
+      return;
+    }
+
+    const cart = JSON.parse(storage) as string[];
+
+    if (!cart.includes(productId)) {
+      localStorage.setItem(STORAGE_NAME, JSON.stringify([...cart, productId]));
+      showCartCount();
+    }
+
+    window.location.hash = '#cart';
+    new Modal().render();
   }
   
   private setImage(e: Event): void {

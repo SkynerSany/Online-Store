@@ -137,7 +137,15 @@
   margin-left: 1rem;
 }
 
-@media(max-width: $small) {
+.cart-total {
+  font-size: 2rem;
 
+  
+  @media(max-width: $medium) {
+    display: none;
+  }
+}
 
+.cart-total__price {
+  color: $color-orange;
 }
