@@ -11,14 +11,19 @@ const STORAGE_NAME = 'storeCart';
 
 const headerElement: HTMLTemplateElement = stringToElement(HEADER_TEMPLATE);
 
-function getTotalPrice(storageArr: string[], cartTotal: HTMLElement): void {
-  const total = cartTotal;
+export function getTotalPrice(): void {
+  const cartTotal = document.querySelector(CART_TOTAL);
+  if (!cartTotal) return;
+
   getProductsData()
   .then((productsData) => {
+    const storage = localStorage.getItem(STORAGE_NAME);
     if (!productsData) return;
+  
+    const storageArr = JSON.parse(storage || `[]`) as string[];
     const currentProducts = productsData.filter((product) => storageArr.includes(`${ product.id }`));
     const productTotal = currentProducts.reduce((prev, cur) => prev + cur.price, 0);
-    total.textContent = `${ productTotal }р.`;
+    cartTotal.textContent = `${ productTotal || 0 } р.`;
   },
   (err) => console.error(err));
 }
@@ -26,11 +31,10 @@ function getTotalPrice(storageArr: string[], cartTotal: HTMLElement): void {
 export function showCartCount(): void {
   const btnCart = document.querySelector(BTN_CART);
   const storage = localStorage.getItem(STORAGE_NAME);
-  const cartTotal = document.querySelector(CART_TOTAL);
   if (!storage || !btnCart) return;
 
   const storageArr = JSON.parse(storage) as string[];
-  if (cartTotal instanceof HTMLElement) getTotalPrice(storageArr, cartTotal);
+  getTotalPrice();
   btnCart.textContent = `${ storageArr.length }`;
 }
 
@@ -42,6 +46,7 @@ export const addListenerForMenu = (): void => {
   });
 
   showCartCount();
+  getTotalPrice();
 }
 
 export const hideHeaderLineMenu = (idPage: string):void => {

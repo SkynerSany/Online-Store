@@ -70,6 +70,7 @@ export default class Product {
 
     if (!storage) {
       localStorage.storeCart = JSON.stringify([productId]);
+      showCartCount();
       return;
     }
 

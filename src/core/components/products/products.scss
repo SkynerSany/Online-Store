@@ -122,4 +122,29 @@
   @media screen and (max-width: $small) {
     grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
   }
+
+  @media screen and (min-width: $large) {
+    &-list {
+      grid-template-columns: auto;
+  
+      & > .product > .product__container {
+        & > .product__info {
+          display: grid;
+          grid-template-columns: 25rem auto 17rem;
+          gap: 1rem;
+        }
+  
+        & > .product__btns {
+          position: absolute;
+          bottom: 3rem;
+          right: 3rem;
+    
+          grid-template-columns: 10rem 5rem;
+          justify-content: end;
+        }
+      }
+    }
+  }
+
+  
 }
