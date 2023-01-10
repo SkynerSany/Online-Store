@@ -76,6 +76,7 @@ const CATALOG_TEMPLATE = `<article class="catalog">
                                       <p class="products__sort-title">Сначала дешевые</p>
                                     </div>
                                   </div>
+                                  <p class="not-found">Товары не обноружены</p>
                                   <div class="products__container"></div>
                                   <div class="pagination">
                                   </div>
