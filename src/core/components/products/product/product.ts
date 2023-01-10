@@ -33,6 +33,12 @@ export default class Product {
   private productData: Iproduct;
   private productElement: HTMLTemplateElement;
 
+  static openProductInfo(newNode: HTMLElement): void {
+    const id = newNode.dataset.productId;
+    if (!id) return;
+    window.location.hash = `#product-${ id }`;
+  }
+
   constructor(productData: Iproduct, productTemplate = PRODUCT_TEMPLATE) {
     this.productData = productData;
     this.productElement = stringToElement(productTemplate);
@@ -80,11 +86,7 @@ export default class Product {
     showCartCount();
   }
 
-  private openProductInfo(newNode: HTMLElement): void {
-    const id = newNode.dataset.productId;
-    if (!id) return;
-    window.location.hash = `#product-${ id }`;
-  }
+  
 
   private setEvents(newNode: HTMLTemplateElement): void {
     const btnAddToCart = newNode.querySelector(`.${ BTN_ADD_TO_CART.DEFAULT }`);
@@ -93,7 +95,7 @@ export default class Product {
     if (!(btnAddToCart instanceof HTMLButtonElement)) return;
 
     btnAddToCart.addEventListener('click', () => this.addToCart(btnAddToCart, newNode));
-    imgContainer?.addEventListener('click', () => this.openProductInfo(newNode));
+    imgContainer?.addEventListener('click', () => Product.openProductInfo(newNode));
     buy?.addEventListener('click', () => this.openCart(newNode));
   }
 

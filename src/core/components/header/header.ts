@@ -44,5 +44,12 @@ export const addListenerForMenu = (): void => {
   showCartCount();
 }
 
+export const hideHeaderLineMenu = (idPage: string):void => {
+  const menuLine = document.querySelector('.header__bottom-row');
+  if (menuLine instanceof HTMLElement && idPage === 'cart-page') {
+    menuLine.classList.add('menu-line_not-active');
+  } else menuLine?.classList.remove('menu-line_not-active');
+}
+
 
 export default headerElement;

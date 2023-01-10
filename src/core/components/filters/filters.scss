@@ -260,18 +260,7 @@
 }
 
 .filters__btn-clear {
-  height: 40px;
-  padding: 1rem;
-
-  font-size: 1.6rem;
-  color: $text-color-white;
-
-  background-color: $color-blue;
-  border-radius: 0.4rem;
-  outline: none;
-  cursor: pointer;
-
-  transition: background-color $duration-fast linear;
+  @include buttonSite;
 
   &:hover {
     background-color: $color-dark-blue;

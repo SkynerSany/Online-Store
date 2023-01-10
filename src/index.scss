@@ -34,9 +34,13 @@ body {
 
 main {
   flex: 1 0 auto;
+  width: 100%;
+  max-width: 134rem;
+  padding: 2rem 0rem;
+  margin: auto;
 }
 
 .wrapper {
   width: 95%;
-  max-width: 130rem;
+  max-width: 134rem;
 }

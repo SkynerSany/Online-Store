@@ -4,13 +4,13 @@
 
 .header__top-row {
   position: relative;
-  z-index: 3;
+  justify-content: space-between;
   
-  margin: 0 auto;
-  padding: 1rem 0rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  margin: auto;
 
   background-color: $text-color-white;
 }

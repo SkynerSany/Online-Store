@@ -36,7 +36,7 @@ main {
 
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: 0;
 }
 
 hr {
@@ -130,6 +130,7 @@ button {
   background: none;
   border: none;
   padding: 0;
+  cursor: pointer;
 }
 
 button::-moz-focus-inner,
