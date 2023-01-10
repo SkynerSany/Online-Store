@@ -6,16 +6,18 @@ class CartController {
   static countProducts = 0;
 
   public addListenerForPlus(elemInput: HTMLElement, elemAmount: HTMLElement, elemSum: HTMLElement, elemSumProducts:HTMLElement, index: number): void {
+    const headerSum = document.querySelector('.cart-total__price');
     if (elemInput instanceof HTMLElement) {
       CartController.countProducts += 1;
       const productInput = elemInput;
       const countProducts = String(+productInput.innerText + 1);
       productInput.innerText = countProducts;
-      if (elemAmount instanceof HTMLElement && elemSum instanceof HTMLElement) {
+      if (elemAmount instanceof HTMLElement && elemSum instanceof HTMLElement && headerSum instanceof HTMLElement) {
         const amount = elemAmount;
         const cartSumm = elemSum;
         amount.innerText = `${+amount.innerText.slice(0, amount.innerText.length - 2) + products.products[index].price} p`;
         cartSumm.innerText = amount.innerText;
+        headerSum.textContent = amount.innerText;
       }
     }
     if (elemSumProducts instanceof HTMLElement) {
@@ -25,16 +27,18 @@ class CartController {
   }
 
   public addListenerForMinus(elemInput: HTMLElement, elemAmount: HTMLElement, elemSum: HTMLElement, elemSumProducts:HTMLElement, index: number): void {
+    const headerSum = document.querySelector('.cart-total__price');
     if (elemInput instanceof HTMLElement) {
       const productInput = elemInput;
       CartController.countProducts -= 1;
       const countProducts = String(+productInput.innerText - 1);
       productInput.innerText = countProducts;
-      if (elemAmount instanceof HTMLElement && elemSum instanceof HTMLElement) {
+      if (elemAmount instanceof HTMLElement && elemSum instanceof HTMLElement && headerSum instanceof HTMLElement) {
         const amount = elemAmount;
         const cartSumm = elemSum;
         amount.innerText = `${+amount.innerText.slice(0, amount.innerText.length - 2) - products.products[index].price} р`;
         cartSumm.innerText = amount.innerText;
+        headerSum.textContent = amount.innerText;
       }
       if (elemSumProducts instanceof HTMLElement) {
         const summProducts = elemSumProducts;
@@ -44,21 +48,23 @@ class CartController {
   }
 
   public addListenerForBtnRemove(currentBox: HTMLElement, elemInput: HTMLElement, elemAmount: HTMLElement, elemSum: HTMLElement, elemSumProducts:HTMLElement, index:number, elemBtn: HTMLButtonElement):void {
+    const headerSum = document.querySelector('.cart-total__price');
     const storage = localStorage.getItem('storeCart');
     if (storage) {
       const arrayProducts = JSON.parse(storage) as string[];
-      arrayProducts.splice(arrayProducts.indexOf(index.toString()), 1);
+      arrayProducts.splice(arrayProducts.indexOf((index + 1).toString()), 1);
       localStorage.setItem('storeCart', JSON.stringify([...arrayProducts]));
       showCartCount();
     }
 
-    if (elemAmount instanceof HTMLElement && elemInput instanceof HTMLElement) {
+    if (elemAmount instanceof HTMLElement && elemInput instanceof HTMLElement && headerSum instanceof HTMLElement) {
       const productInput = elemInput;
       const amount = elemAmount;
       const cartSumm = elemSum;
       CartController.countProducts -= +productInput.innerText;
       amount.innerText = `${+amount.innerText.slice(0, amount.innerText.length - 2) - (products.products[index].price * +productInput.innerText)} р`;
       cartSumm.innerText = amount.innerText;
+      headerSum.textContent = amount.innerText;
     }
 
     if (elemSum instanceof HTMLElement) {
@@ -90,13 +96,15 @@ class CartController {
     }
 
     public addFeaturesForClick (boxTotalOne:HTMLElement, boxTotalTwo:HTMLElement, elemAmount:HTMLElement) {
+      const headerSum = document.querySelector('.cart-total__price');
       boxTotalOne.classList.remove('cart__summ-box_not-active');
       boxTotalTwo.classList.add('cart__summ-box_none');
       const elemSumm = boxTotalOne.querySelector('.cart__summ');
-      if (elemAmount instanceof HTMLElement && elemSumm instanceof HTMLElement) {
+      if (elemAmount instanceof HTMLElement && elemSumm instanceof HTMLElement && headerSum instanceof HTMLElement) {
         const amount = elemAmount;
         const disc =`${(+amount.innerText.slice(0, amount.innerText.length - 2) / 100) * 10}`;
         elemSumm.innerText = `${(+amount.innerText.slice(0, amount.innerText.length - 2)) - +disc} р`;
+        headerSum.textContent = elemSumm.innerText;
       }
     }
 

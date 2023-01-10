@@ -108,6 +108,7 @@ class CartPage extends Page {
         }
       });
       minus.addEventListener('click', ():void => {
+        const headerSum = document.querySelector('.cart-total__price');
         if (productInput instanceof HTMLElement 
           && amount instanceof HTMLElement 
           && cartSumm instanceof HTMLElement 
@@ -120,6 +121,7 @@ class CartPage extends Page {
           cartController.addListenerForMinus(productInput, amount, cartSumm, summProducts, +array[i] - 1);
           if (productInput.innerText < '1') {
             cartController.addListenerForBtnRemove(productBox, productInput, amount, cartSumm, summProducts, +array[i] - 1, totalBoxBtn);
+            if (headerSum instanceof HTMLElement) headerSum.textContent = cartSumm.innerText;
           }
           if (cartSumm.innerText.slice(0, cartSumm.innerText.length - 2) === '0') {
             cartName.innerText = 'Ваша корзина пуста';
@@ -129,6 +131,7 @@ class CartPage extends Page {
           sumWithDisc.classList.add('cart__summ-box_not-active');
           sumWithoutDisc.classList.remove('cart__summ-box_none');
           this.addClassForTotalBox(boxTotal);
+          
         }
       });
       // ____________________________________
