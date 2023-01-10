@@ -92,11 +92,6 @@ export default class Modal {
     ).replace(
       /\/\//g, '/'
     );
-
-    const mm = input.value.slice(0, 2);
-    const yy = input.value.slice(3);
-    if (+mm > 12) input.value = input.value.replace(mm, '12');
-    if (+yy > 12) input.value = input.value.replace(yy, '12');
   }
 
   private isNumber(e: Event): void {
