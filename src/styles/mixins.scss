@@ -1,0 +1,17 @@
+@mixin centeringOfElements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin buttonSite {
+  height: 40px;
+  padding: 1rem;
+  font-size: 1.6rem;
+  color: #ffffff;
+  background-color: #4878a6;
+  border-radius: 0.4rem;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 200ms linear;
+}

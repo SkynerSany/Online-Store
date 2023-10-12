@@ -1,0 +1,73 @@
+.footer {
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $color-light-blue;
+}
+
+.footer__wrapper {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__logo {
+  width: 15.5rem;
+  aspect-ratio: 4/1;
+
+  background-image: url('../../../assets/icons/logo.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
+}
+
+.footer__socilal {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer__social-link {
+  height: 5rem;
+  display: block;
+
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+
+  transition: all $duration-fast linear;
+
+  &.author {
+    width: 5rem;
+
+    background-color: $color-blue;
+    mask-image: url(../../../assets/icons/github.svg);
+    -webkit-mask-image: url(../../../assets/icons/github.svg);
+
+    &:hover {
+      background-color: $color-dark-blue;
+    }
+  }
+
+  &.course {
+    width: 13rem;
+
+    background-image: url(../../../assets/icons/rs_school.svg);
+  }
+}
+
+.footer__date {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: $color-blue;
+
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
+}

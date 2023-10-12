@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800&display=swap');
+
+html {
+  font-family: 'Exo 2';
+  font-size: 10px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  &.block {
+    overflow: hidden;
+  }
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  cursor: default;
+}
+
+main {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 134rem;
+  padding: 2rem 0rem;
+  margin: auto;
+}
+
+.wrapper {
+  width: 95%;
+  max-width: 134rem;
+}
